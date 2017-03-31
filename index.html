@@ -2,18 +2,83 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title></title>
+	<title>Neckerest</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<!-- ==================== fonts ===================== -->
+	<!-- fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<!-- our css -->
+	<link rel="stylesheet" href="./src/css/app.css">
+	<link rel="stylesheet" href="./src/css/panels.css">
+	<!-- favicon -->
 
-	<!-- ===================== css ====================== -->
-	<link rel="stylesheet" href="/src/css/app.css">
 </head>
 <body>
+	<div class="backgroundImg"></div>
 
- 	<!-- =============== jquery ================ -->
+	<!-- Top of Screen Section -->
+	<header>
+		<div class="Grid">
+			<div class="Grid-cell">
+				<div class="weather">50°<br>Normalville, Fantastic Country<br>
+					<i class="fa fa-cloud" aria-hidden="true"></i>
+				</div>
+			</div>
+			<div class="Grid-cell">
+				<div class="about">
+					<img src="./src/assets/logopixels.png" alt="Neckerest logo" style="width:80px;height:80px;">
+				</div>
+			</div>
+			<div class="Grid-cell">
+				<div class="calendar">Calendar</div>
+			</div>
+		</div>
+	</header>
+
+	<!-- About Panel -->
+
+	<!-- Calendar Panel -->
+
+
+
+	<!-- Middle of Screen Area -->
+	<div id="middle">
+
+		<div class="greeting">Good time of day, you!</div>
+
+		<div class="time">00:00AM</div>
+
+	</div>
+
+
+	<!-- Bottom of Screen Section -->
+	<footer>
+		<div class="Grid">
+			<div class="Grid-cell">
+				<div class="userpref">
+					<i class="fa fa-cog" aria-hidden="true"></i>
+				</div>
+			</div>
+			<div class="Grid-cell">
+				<div class="quote">
+			"This is a fine, introspective quote that resonates with me a little"
+		</div>
+			</div>
+			<div class="Grid-cell">
+				<div class="todo">To Do</div>
+			</div>
+		</div>
+	</footer>
+
+	<!-- User Preferences Panel -->
+
+	<!-- To Do Panel-->
+
+
+
+ 	<!-- jquery -->
   	<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
-  	<!-- ================ our javascript ================== -->
+  	<!-- our javascript -->
   	<script src="src/js/app.js"></script>
 
 </body>
