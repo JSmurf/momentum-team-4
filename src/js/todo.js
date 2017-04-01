@@ -78,8 +78,28 @@ var ToDo = (function() {
 
 
 
-  //Initialise the list object. Default is no todos unless specified via user prefs.
+  //Initialise the list object. Default is no todos unless specified via user prefs. All operations should take place in localStorage for persistence.
   function initList(){
+    
+    var listofToDos = document.createElement('ul').attr('id', 'taskList');
+    //Check if localStorage already has a task list. If not, create an empty task list. If it does, pull the task list. In either case, add it to a ul DOM element and return it so the DOM can be cached.
+    if(localStorage.getItem("taskList")){
+
+      var i;
+      var taskList;
+      taskList = localStorage.getItem("taskList");
+      listofToDos.innerHTML = taskList;
+    } 
+
+    var dummy = document.createElement('li');
+    dummy.innerHTML = "<input class='task' placeholder='Add a new task...'/>";
+    listofToDos.appendChild(dummy);
+
+    return listofToDos;
+  }
+
+  //Update the task list stored in the browser for every addition, completion, or deletion action
+  function saveTaskListLocal(){
 
   }
 
