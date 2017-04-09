@@ -1,0 +1,45 @@
+.hidden {
+
+/*For tasks that are completed and chosen to be hidden from view*/
+}
+
+.completed {
+
+/*For tasks marked as completed*/
+
+}
+
+.category-important {
+
+/*For tasks marked as important*/
+}
+
+.category-delegated {
+
+/*For tasks delegated to someone else*/
+}
+
+.category-now {
+
+/*For tasks to be done now*/
+}
+
+.category-later {
+
+/*For tasks to be done later (sometime in the future)*/
+}
+
+.task {
+
+  /*For styling <li> DOM elements as tasks */
+}
+
+.task > input {
+
+/*  Alters default input look and feel*/
+}
+
+.task:hover {
+
+  /*Handle task focus highlights*/
+}
