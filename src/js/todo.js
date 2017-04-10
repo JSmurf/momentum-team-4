@@ -3,26 +3,85 @@
 /*Author: Joshua E. Thomas
 NOTE: Depends on jQuery and jQuery UI (for reordering ToDo entries*/
 
-var TaskMod = (function() {
+var TaskMod = (function(window, undefined) {
   var DOM = {};
   var listofToDos;
+  var blank;
   var taskArray = []; //Array Model for storing ToDo objects 
       
 
   /* =================== private methods ================= */
   // cache DOM elements. Assumes id of parent div is 'todo' on main page.
   function cacheDom() {
-    DOM.$todo = $('#todo'); //parent div element
-    DOM.$listofToDos = initList();//$(document.createElement('ul')); unordered list of todos
+    DOM.$todo = document.getElementById("todoList"); //parent div element
+    // DOM.$listofToDos = initList();//$(document.createElement('ul')); unordered list of todos
     DOM.$todoCounter = $(document.createElement('p')); //shows remaining todos
     // DOM.$emptyToDo = $(document.createElement('input')); //allows adding more todos
     DOM.$showCompleted = $(document.createElement('button')); //shows completed todos
+    //initList();
+
+    //DOM.$todo.innerHTML = initList().outerHTML;
+    DOM.$todo.appendChild(initList());
+
+    //DOM.$todo.html = initList().outerHTML; //Why doesn't this work?
+  }
+
+    //Initialise the list object. Default is no todos unless specified via user prefs. All operations should take place in localStorage for persistence.
+  function initList(){
+    
+    console.log("Initialising list");
+    listofToDos = document.createElement('ul');
+    listofToDos.setAttribute('id', 'taskList');
+    
+    var dummy = document.createElement('li');
+    dummy.className = "task";
+   
+    // var taskForm = document.createElement('form');
+    // taskForm.className = "new-task-form";
+    
+    blank = document.createElement('input');
+    blank.setAttribute('id', 'blankTask');
+    blank.setAttribute('type', 'text');
+    blank.className = "form-control";
+    blank.setAttribute('placeholder', 'Add a new task...');
+    
+    // taskForm.appendChild(blank);
+
+    // dummy.appendChild(taskForm);
+    dummy.appendChild(blank);
+
+    listofToDos.appendChild(dummy);
+
+    //Check if localStorage already has a task list. If not, create an empty task list. If it does, pull the task list. In either case, add it to a ul DOM element and return it so the DOM can be cached.
+    if(localStorage.getItem("taskList")){
+
+      var i;
+      var taskList;
+      taskList = localStorage.getItem("taskList");
+      listofToDos.innerHTML = taskList;
+    } 
+
+    console.log(listofToDos);
+
+   // DOM.$todo.html = listofToDos.outerHTML;
+
+    return listofToDos;
   }
 
   //Bind task addition to the enter key
   function bindNewTaskEvent(e){
 
+    e.preventDefault();
     //on detecting the enter keystroke, get the value of the input element and pass to addToDo()
+    alert("Keystroke detected");
+    var key = e.which || e.keyCode;
+    if (key === 13) { // 13 is enter
+      // Run addToDo using the object's value
+      blankTask = document.getElementById("blankTask");
+      addToDo(blankTask.val);
+    }
+
+    
   }
 
   function bindCompletionEvent(e){
@@ -33,6 +92,10 @@ var TaskMod = (function() {
   function bindTaskRemovalEvent(e){
 
     //on clicking the remove button we should delete the task from the listoftoDos
+    e.preventDefault();
+
+    removeToDo(e);
+    return false;
   }
 
 
@@ -80,7 +143,7 @@ var TaskMod = (function() {
 
     //Set up the task input and bind the edit event
     var displayTask = document.createElement('input');
-    displayTask.setAttribute("type", text);
+    displayTask.setAttribute("type", "text");
     displayTask.value = this.desc;
     displayTask.addEventListener("click", bindEditToDoEvent);
     
@@ -111,39 +174,14 @@ var TaskMod = (function() {
     var setDesc;
     var render;
 
-    this.created = Math.floor(Date.now());
-    this.id = created; //set ID to time of creation
+    this.id = Math.floor(Date.now());
+    //this.id = created; //set ID to time of creation
     this.desc = name;
     this.completed = 0;
     this.toggle = toggleToDo;
     this.setDesc = setToDoDesc; 
     this.render = renderToDo;
 
-  }
-
-
-
-  //Initialise the list object. Default is no todos unless specified via user prefs. All operations should take place in localStorage for persistence.
-  function initList(){
-    
-    listofToDos = document.createElement('ul');
-    listofToDos.setAttribute('id', 'taskList');
-    var dummy = document.createElement('li');
-    dummy.className = "task";
-    dummy.innerHTML = "<input placeholder='Add a new task...'/>";
-    listofToDos.appendChild(dummy);
-
-    //Check if localStorage already has a task list. If not, create an empty task list. If it does, pull the task list. In either case, add it to a ul DOM element and return it so the DOM can be cached.
-    if(localStorage.getItem("taskList")){
-
-      var i;
-      var taskList;
-      taskList = localStorage.getItem("taskList");
-      listofToDos.innerHTML = taskList;
-    } 
-
-
-    return listofToDos;
   }
 
   //Update the task list stored in the browser for every addition, completion, or deletion action
@@ -156,12 +194,15 @@ var TaskMod = (function() {
 
     //Create a new todo
     var task = new ToDo(name);
+
+    console.log(JSON.stringify(task));
     
     //Render the new todo
-    var taskRendered = task.renderToDo;
+    var taskRendered = task.render();
+    console.log(taskRendered.innerHTML);  
 
     //Add the new todo in the eq(2) position of listofTodos
-    listofToDos.insertBefore(taskRendered, listofToDos.childNodes[1]);
+    listofToDos.appendChild(taskRendered);
     
     //Add the new todo to existing model array for future lookups
     taskArray.push(task);
@@ -210,13 +251,15 @@ var TaskMod = (function() {
 
 
   //Remove a todo
-  function removeToDo(){
+  function removeToDo(evt){
 
     //Get a reference to the parent <li> whose close button was clicked
-    var parentTaskID = this.parentNode.id;
+    var parentTaskID = evt.target.parentNode.parentNode.id;
+
+    console.log(parentTaskID);
 
     //Remove the li element from the parent <ul> listofToDos
-    var parentTask = document.getElementByID(parentTaskID);
+    var parentTask = document.getElementById(parentTaskID);
     parentTask.parentNode.removeChild(parentTask);
 
     //Lookup and remove the associated task from the task array
@@ -237,19 +280,75 @@ var TaskMod = (function() {
   
   // render DOM
   function displayToDoList() {
-    DOM.$todo
-      .html = DOM.listofToDos;
+    //DOM.$todo.html = initList();
+
+    /*var elem = document.getElementById("todoList");
+    elem.innerHTML = initList().outerHTML;
+
+    console.log(elem);*/
   }
 
   /* =================== public methods ================== */
   // main init method
   function init() {
     cacheDom();
+
+    console.log("Just cached DOM");
+
+    window.onload = function(){
+
+      blank.addEventListener('keypress', function(e){
+      
+
+
+    //on detecting the enter keystroke, get the value of the input element and pass to addToDo()
+    
+    var key = e.which || e.keyCode;
+
+    if (key === 13) { // 13 is enter
+      e.preventDefault();
+      //alert("Keystroke detected");
+      // Run addToDo using the object's value
+      blankTask = document.getElementById("blankTask");
+      //alert("Value of new task is " + blankTask.value);
+      addToDo(blankTask.value);
+      blankTask.val="";
+    }
+
+      console.log("In form submit");
+      //on detecting the enter keystroke, get the value of the input element and pass to addToDo()
+      // alert("Keystroke detected");
+      
+      // blankTask = document.getElementById("blankTask");
+      // addToDo(blankTask.val);
+
+      return false;
+      
+
+    }, false);
+
+    }
+    /*taskForm.addEventListener('keyup', function(e){
+      e.preventDefault();
+
+      console.log("In form submit");
+      //on detecting the enter keystroke, get the value of the input element and pass to addToDo()
+      // alert("Keystroke detected");
+      
+      // blankTask = document.getElementById("blankTask");
+      // addToDo(blankTask.val);
+      
+
+    });*/
+
+
+    //console.log(DOM);
+    //displayToDoList();
   }
 
 /* =============== export public methods =============== */
   return {
-    init: init,
-    displayToDoList: displayToDoList
+    init: init
+    //displayToDoList: displayToDoList
   };
-}());
+}(window));
