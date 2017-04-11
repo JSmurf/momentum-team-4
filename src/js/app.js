@@ -1,7 +1,11 @@
 //app.js
 $(document).ready(function () {
 
-  //Module.init();
+  Panels.init();
+  userPref.init();
+  Quotes.init();
+  Weather.init();
   //initialize all modules here
+
 
 });

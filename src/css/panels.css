@@ -1,0 +1,158 @@
+.bottom-panels, .toppanels {
+	width: 100%;
+	height: 100%;
+}
+
+/* User Pref Panel */
+.userprefpanel {
+	height: 20em;
+	width: 25em;
+	float: left;
+	padding: 10px;
+	margin-left: 10px;
+	margin-top: 20%;
+	display: none;
+	background: rgba(0, 0, 0, .8);
+	color: white;
+	z-index: 3;
+	resize: vertical;
+	overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: #fff;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ffffff;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #000000;
+}
+::-webkit-scrollbar-track {
+  background: #666666;
+  border: 0px none #ffffff;
+  border-radius: 36px;
+}
+::-webkit-scrollbar-track:hover {
+  background: #666666;
+}
+::-webkit-scrollbar-track:active {
+  background: #333333;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Left-side Nav */
+.userprefnav {
+	cursor: pointer;
+	float: left;
+	width: 30%;
+	padding: 6px;
+	font-size: 1.2em;
+}
+li {
+	list-style: none;
+	padding-bottom: 5px;
+}
+li:hover {
+	color: blue;
+}
+/* Right-side Selection */
+.showfromnav {
+	float: right;
+	width: 70%;
+	padding: 6px;
+}
+#userpref-features {
+	display: none;
+	padding-bottom: 7px;
+}
+#userpref-theme {
+	display: none;
+	padding-bottom: 7px;
+}
+#userpref-quotes {
+	display: none;
+}
+
+h1 {
+	font-size: 1.35rem;
+	font-weight: 200;
+	text-align: center;
+	padding: 2px;
+	margin-bottom: 4px;
+}
+h3 {
+	font-size: 1.18rem;
+	padding-bottom: 9px;
+	font-weight: 400;
+	color: grey;
+}
+.feat {
+	font-size: 1rem;
+	padding-bottom: 7px;
+}
+input {
+	margin-left: 10px;
+}
+
+
+/* To Do Panel */
+
+.todopanel {
+	height: 20em;
+	width: 25em;
+	float: right;
+	text-align: right;
+	padding: 10px;
+	margin-right: 10px;
+	margin-top: 20%;
+	display: none;
+	background: rgba(0, 0, 0, .9);
+	color: white;
+	z-index: 2;
+	overflow-y: scroll;
+}
+
+/* About Panel */
+
+.aboutpanel {
+	height: 20em;
+	width: 25em;
+	float: center;
+	padding: 10px;
+	margin-left: auto;
+  margin-right: auto;
+	margin-top: 10px;
+	display: none;
+	background: rgba(0, 0, 0, .9);
+	color: white;
+	z-index: 2;
+}
+
+/* Calendar Panel */
+
+.calendarpanel {
+	height: 20em;
+	width: 25em;
+	float: right;
+	padding: 10px;
+	margin-left: auto;
+  margin-right: 10px;
+	margin-top: 10px;
+	display: none;
+	background: rgba(0, 0, 0, .9);
+	color: white;
+	z-index: 2;
+}
