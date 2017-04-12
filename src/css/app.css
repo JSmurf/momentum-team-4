@@ -79,10 +79,20 @@ header {
 	float: left;
 	padding-left: 6px;
 }
+#unit {
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    font-size: .7em;
+}
+#unit:hover {
+    color: blue;
+}
 .about {
 	float: center;
 	padding: 6px;
 	text-align: center;
+	text-shadow: none;
 }
 .about > img {
 	border-radius: 50%;
@@ -93,28 +103,47 @@ header {
 	float: right;
 	padding: 6px;
 }
+/* Hover effects*/
+.weather:hover {
+	color: rgb(69,128,168);
+	text-shadow: none;
+	cursor: pointer;
+}
+.about > img:hover {
+	cursor: pointer;
+	border: 3px solid rgb(240,150,16);
+}
+.calendar:hover {
+	color: rgb(69,128,168);
+	text-shadow: none;
+	cursor: pointer;
+}
 
 /* Middle Section */
 #middle {
 	width: 100%;
+	position: fixed;
 	display: flex;
 	margin-left: auto;
-  margin-right: auto;
-  margin-top: 5rem;
-  -webkit-box-flex: 1;
-  -ms-flex: 1 0 auto;
-  flex: 1 0 auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: column;
-  padding: 0.25em;
-  width: 100%;
-  justify-content: center;
-  text-align: center;
+
+    margin-right: auto;
+    margin-top: 14em;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 0 auto;
+    flex: 1 0 auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: column;
+    padding: 0.25em;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    z-index: -1;
+
 }
 
 .greeting {
@@ -127,24 +156,56 @@ header {
 /* Bottom of Page */
 footer {
 	position: fixed;
-  width: 100%;
-  height: 60px;
-  margin: 0;
-  padding: 0;
-  bottom: 0;
+
+    width: 100%;
+    height: 90px;
+    margin: 0;
+    padding: 0;
+    bottom: 0;
+
 }
 .userpref {
 	float: left;
-	padding-left: 6px;
-	padding-bottom: 4rem;
-	font-size: 2.2rem;
+    margin-top: 11%;
+	padding-left: 10px;
+	padding-bottom: 0;
+    margin-bottom: 0;
+	font-size: 2rem;
 }
 .quote {
 	float: center;
 	text-align: center;
-	padding: 6px;
+	opacity: .86;
+	width: 100%;
+    height: 100%;
+	padding-bottom: 20em;
+    z-index: -1;
+}
+.quote-content {
+	font-size: 1em;
+	font-weight: 200;
+    z-index: -1;
+}
+.quote-author {
+	font-size: .8em;
+	font-weight: 200;
 }
 .todo {
 	float: right;
-	padding: 6px;
+    margin-top: 14%;
+	padding-right: 10px;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+/* Hover effects*/
+.userpref:hover {
+	color: rgb(69,128,168);
+	text-shadow: none;
+	cursor: pointer;
+	font-size: 2rem;
+}
+.todo:hover {
+	color: rgb(69,128,168);
+	text-shadow: none;
+	cursor: pointer;
 }
