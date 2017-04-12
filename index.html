@@ -8,11 +8,11 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	<!-- our css -->
-	<link rel="stylesheet" href="./src/css/todo.css">
 	<link rel="stylesheet" href="./src/css/app.css">
-	<!-- <link rel="stylesheet" href="./src/css/panels.css"> -->
-	
+	<link rel="stylesheet" href="./src/css/panels.css">
+	<link rel="stylesheet" href="./src/css/todo.css">
 	<!-- favicon -->
+    <link rel="shortcut icon" type="image/png" href="./src/assets/logopixels.png">
 
 </head>
 <body>
@@ -22,13 +22,16 @@
 	<header>
 		<div class="Grid">
 			<div class="Grid-cell">
-				<div class="weather">50°<br>Normalville, Fantastic Country<br>
-					<i class="fa fa-cloud" aria-hidden="true"></i>
+				<div class="weather">
+					<div id="weatherTemperature" class="weather"></div><br>
+					<button id="unit">Change Unit</button>
+					<div id="weatherLocation"></div>
+					<i id="weatherIcon" class="" aria-hidden="true"></i>
 				</div>
 			</div>
 			<div class="Grid-cell">
 				<div class="about">
-					<img src="./src/assets/logopixels.png" alt="Neckerest logo" style="width:80px;height:80px;">
+					<img src="./src/assets/logopixels.png" alt="Neckerest logo" style="width:65px;height:65px;">
 				</div>
 			</div>
 			<div class="Grid-cell">
@@ -37,9 +40,15 @@
 		</div>
 	</header>
 
-	<!-- About Panel -->
+	<div class="top-panels">
+		<!-- About Panel -->
+		<div class="aboutpanel">
+		</div>
 
-	<!-- Calendar Panel -->
+		<!-- Calendar Panel -->
+		<div class="calendarpanel">
+		</div>
+	</div>
 
 
 
@@ -63,27 +72,101 @@
 			</div>
 			<div class="Grid-cell">
 				<div class="quote">
-			"This is a fine, introspective quote that resonates with me a little"
-		</div>
+					
+				</div>
 			</div>
 			<div class="Grid-cell">
-				<div id="todoList" class="todo"></div>
+				<div class="todo">To Do</div>
 			</div>
 		</div>
 	</footer>
 
-	<!-- User Preferences Panel -->
+	<div class="bottom-panels">
 
-	<!-- To Do Panel-->
+		<!-- User Preferences Panel -->
+		<div class="userprefpanel">
 
+
+				<div class="userprefnav">
+					<ul class="settings-nav">
+						<li class="features">Features</li>
+						<li class="theme">Theme</li>
+						<li class="quotes">Quotes</li>
+					</ul>
+				</div>
+
+				<div class="showfromnav">
+					<div id="userpref-features">
+						<h3>Features to Show</h3>
+						<div class="feat">
+							<input type="checkbox" checked="checked" name="todofeat" id="todofeat">
+							<label for="todo">To Do</label><br>
+						</div>
+						<div class="feat">	
+							<input type="checkbox" checked="checked" name="weatherfeat" id="weatherfeat">
+							<label for="weather">Weather</label><br>
+						</div>
+						<div class="feat">
+							<input type="checkbox" checked="true" name="calendarfeat" id="calendarfeat">
+							<label for="calendar">Calendar</label><br>
+						</div>
+						<div class="feat">
+							<input type="checkbox" checked="true" name="quotefeat" id="quotefeat">
+							<label for="quote">Quote</label><br>
+						</div>
+						<div class="feat">
+							<input type="checkbox" checked="true" name="greetingfeat" id="greetingfeat">
+							<label for="greeting">Greeting</label><br>
+						</div>
+						<div class="feat">
+							<input type="checkbox" checked="true" name="timefeat" id="timefeat">
+							<label for="time">Time</label><br>
+						</div>
+						<div class="feat">
+							<input type="checkbox" checked="true" name="aboutfeat" id="aboutfeat">
+							<label for="about">Logo</label>
+						</div>
+					</div>
+
+					<div id="userpref-theme">
+						<h3>Theme</h3>
+						<input class="features" type="radio" name="themedark" id="themedark">
+						<label for="theme">Dark</label>
+						<input class="features" type="radio" name="themelight" id="themelight">
+						<label for="theme">Light</label>
+						<input class="features" type="radio" name="themecolor" id="themecolor">
+						<label for="theme">Colorful</label>
+					</div>
+
+					<div id="userpref-quotes">
+						<h3>Quotes</h3>
+						<input class="features" type="radio" name="quotesdesign" value="quotes-design">
+						<label for="theme">On Design</label>
+						<input class="features" type="radio" name="quoteshumor" value="quotes-humor">
+						<label for="theme">Humorous</label>
+					</div>
+				</div>
+
+		</div>
+
+		<!-- To Do Panel-->
+		<div class="todopanel">
+			<div id="todoList" class="todo"></div>
+		</div>
+
+	</div>
 
 
  	<!-- jquery -->
-  	<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
-  	<!-- our javascript -->
-  	<script src="src/js/todo.js"></script>
-  	<script src="src/js/app.js"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
 
+	<!-- our javascript -->
+	<script src="./src/js/app.js"></script>
+	<script src="./src/js/Panels.js"></script>
+	<script src="./src/js/userPref.js"></script>
+	<script src="./src/js/Quotes.js"></script>
+	<script src="./src/js/Weather.js"></script>
+	<script src="src/js/todo.js"></script>
 
 </body>
 </html>
