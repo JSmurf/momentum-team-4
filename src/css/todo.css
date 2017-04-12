@@ -1,3 +1,7 @@
+.taskList {
+	overflow: scroll;
+}
+
 .hidden {
 
 /*For tasks that are completed and chosen to be hidden from view*/
@@ -6,6 +10,7 @@
 .completed {
 
 /*For tasks marked as completed*/
+text-decoration:line-through;
 
 }
 

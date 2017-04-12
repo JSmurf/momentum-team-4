@@ -32,6 +32,7 @@ var TaskMod = (function(window, undefined) {
     console.log("Initialising list");
     listofToDos = document.createElement('ul');
     listofToDos.setAttribute('id', 'taskList');
+    listofToDos.className = "taskList";
     
     var dummy = document.createElement('li');
     dummy.className = "task";
@@ -87,6 +88,38 @@ var TaskMod = (function(window, undefined) {
   function bindCompletionEvent(e){
 
     //on marking a todo as completed we should set its state and strikeout its description
+
+    e.preventDefault();
+
+    //Get the parent node's ID and use that to find the associated task input
+
+    //Remove click and keypress handlers for editing 
+
+    //Bind the uncompletion event
+
+    //Apply the completed class 
+
+    //Update the taskArray model
+
+    //Save the tasklst to localStorage
+
+  }
+
+  function bindUncompletionEvent(e){
+
+    //upon deselecting a todo as completed we should remove its text decoration and restore it as a normal task
+
+    e.preventDefault();
+
+    //Get the parent node's ID and use that to find the associated task input
+
+    //Add click and keypress handlers for editing 
+
+    //Remove the completed class 
+
+    //Update the taskArray model
+
+    //Save the tasklst to localStorage
   }
 
   function bindTaskRemovalEvent(e){
@@ -107,11 +140,53 @@ var TaskMod = (function(window, undefined) {
   function bindEditToDoEvent(e){
 
     //when a ToDo's description is clicked, it should become editable
+
+    e.preventDefault();
+
+    //Get the element that was clicked on
+    var parentTask = e.target;
+    //console.log("Edit event fired for " + parentTask.id);
+
+    //Add the editing class
+    parentTask.classList.add("editing");
+
+    //remove the listener for the click event while editing--we will add this back once editing is done.
+    parentTask.removeEventListener("click", bindEditToDoEvent);
+
+    //Set the field to editable
+    parentTask.readOnly = false;
+
+    
   }
 
   function bindDoneEditingEvent(e){
 
     //when the Enter keystroke is detected in a task being edited, it should cease to be editable
+
+    var key = e.which || e.keyCode;
+
+    if (key === 13) { // 13 is enter
+      e.preventDefault();
+      //alert("Keystroke detected");
+
+      //get target element
+      var parentTask = e.target;
+
+      //Set field to being uneditable
+      parentTask.readOnly = true;
+
+      //Remove the editing class
+      parentTask.classList.remove("editing");
+
+      //Rebind click handler
+      parentTask.addEventListener("click", bindEditToDoEvent);
+      
+      //Retrieve and set the associated task object's new description
+      taskArray[lookupTask(parentTask.parentNode.id)].setDesc(parentTask.value);
+
+      //Save the task list to local storage
+
+    }
   }
 
   //Toggle ToDo completed  or not. This should be assigned to the ToDo object
@@ -142,10 +217,14 @@ var TaskMod = (function(window, undefined) {
     taskCmpBtn.addEventListener("click", bindCompletionEvent);
 
     //Set up the task input and bind the edit event
+    var taskInputId = "inp" + this.id;
     var displayTask = document.createElement('input');
+    displayTask.setAttribute("id", taskInputId);
     displayTask.setAttribute("type", "text");
     displayTask.value = this.desc;
+    displayTask.setAttribute("readonly", "true");//displayTask.readOnly = true;
     displayTask.addEventListener("click", bindEditToDoEvent);
+    displayTask.addEventListener("keypress", bindDoneEditingEvent);
     
     //Set up the trash function and bind the delete event
     var taskDelBtnID = "del" + this.id;
@@ -312,7 +391,7 @@ var TaskMod = (function(window, undefined) {
       blankTask = document.getElementById("blankTask");
       //alert("Value of new task is " + blankTask.value);
       addToDo(blankTask.value);
-      blankTask.val="";
+      blankTask.value="";
     }
 
       console.log("In form submit");
