@@ -1,8 +1,12 @@
 //app.js
 $(document).ready(function () {
 
-  //Module.init();
-  //initialize all modules here
+  Panels.init();
+  userPref.init();
+  Quotes.init();
+  Weather.init();
   TaskMod.init();
+  //initialize all modules here
+
 
 });
