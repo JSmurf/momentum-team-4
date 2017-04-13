@@ -6,7 +6,6 @@ NOTE: Depends on jQuery and jQuery UI (for reordering ToDo entries*/
 var TaskMod = (function(window, undefined) {
   var DOM = {};
   var listofToDos;
-  var blank;
   var taskArray = []; //Array Model for storing ToDo objects 
       
 
@@ -40,11 +39,12 @@ var TaskMod = (function(window, undefined) {
     // var taskForm = document.createElement('form');
     // taskForm.className = "new-task-form";
     
-    blank = document.createElement('input');
+    var blank = document.createElement('input');
     blank.setAttribute('id', 'blankTask');
     blank.setAttribute('type', 'text');
     blank.className = "form-control";
     blank.setAttribute('placeholder', 'Add a new task...');
+    blank.addEventListener("keypress", bindNewTaskEvent);
     
     // taskForm.appendChild(blank);
 
@@ -74,13 +74,27 @@ var TaskMod = (function(window, undefined) {
 
     e.preventDefault();
     //on detecting the enter keystroke, get the value of the input element and pass to addToDo()
-    alert("Keystroke detected");
+    
     var key = e.which || e.keyCode;
+
     if (key === 13) { // 13 is enter
+      e.preventDefault();
+      //alert("Keystroke detected");
       // Run addToDo using the object's value
       blankTask = document.getElementById("blankTask");
-      addToDo(blankTask.val);
+      //alert("Value of new task is " + blankTask.value);
+      addToDo(blankTask.value);
+      blankTask.value="";
     }
+
+      console.log("In form submit");
+      //on detecting the enter keystroke, get the value of the input element and pass to addToDo()
+      // alert("Keystroke detected");
+      
+      // blankTask = document.getElementById("blankTask");
+      // addToDo(blankTask.val);
+
+      return false;
 
     
   }
@@ -91,15 +105,35 @@ var TaskMod = (function(window, undefined) {
 
     e.preventDefault();
 
-    //Get the parent node's ID and use that to find the associated task input
+    //Get the next sibling of the checkbox to grab the input element
+    var parentTask = e.target.nextSibling;
 
-    //Remove click and keypress handlers for editing 
+    console.log("Associated input is " + parentTask.id);    
 
-    //Bind the uncompletion event
+    //Verify the state of the target, and add/remove any event bindings necessary along with the completed class
+    if(e.target.checked){
 
-    //Apply the completed class 
+      //alert("Completion triggered");
 
-    //Update the taskArray model
+      parentTask.removeEventListener("click", bindEditToDoEvent);
+      
+      parentTask.classList.add("completed");
+
+    } else{
+
+      //alert("Uncompletion triggered");
+
+      parentTask.addEventListener("click", bindEditToDoEvent);
+      
+      parentTask.classList.remove("completed");
+    }
+    
+    //Set completion state on the target task and update the taskArray model
+    console.log("Task ID is " + parentTask.parentNode.id);
+    console.log("Before" + JSON.stringify(taskArray));
+    taskArray[lookupTask(parentTask.parentNode.id)].toggle();
+    console.log("After" + JSON.stringify(taskArray));
+    //console.log("Task Array obect completion state is " + taskArray[lookupTask(parentTask.parentNode.id)].completed);
 
     //Save the tasklst to localStorage
 
@@ -112,6 +146,7 @@ var TaskMod = (function(window, undefined) {
     e.preventDefault();
 
     //Get the parent node's ID and use that to find the associated task input
+    
 
     //Add click and keypress handlers for editing 
 
@@ -192,7 +227,7 @@ var TaskMod = (function(window, undefined) {
   //Toggle ToDo completed  or not. This should be assigned to the ToDo object
   function toggleToDo(){
 
-    this.completed = completed ? 0 : 1;
+    this.completed = this.completed ? 0 : 1;
 
   }
 
@@ -214,7 +249,7 @@ var TaskMod = (function(window, undefined) {
     var taskCmpBtn = document.createElement('input');
     taskCmpBtn.setAttribute("type", "checkbox");
     taskCmpBtn.setAttribute("id", taskCmpBtnId);
-    taskCmpBtn.addEventListener("click", bindCompletionEvent);
+    taskCmpBtn.addEventListener("change", bindCompletionEvent);
 
     //Set up the task input and bind the edit event
     var taskInputId = "inp" + this.id;
@@ -380,49 +415,13 @@ var TaskMod = (function(window, undefined) {
       
 
 
-    //on detecting the enter keystroke, get the value of the input element and pass to addToDo()
     
-    var key = e.which || e.keyCode;
-
-    if (key === 13) { // 13 is enter
-      e.preventDefault();
-      //alert("Keystroke detected");
-      // Run addToDo using the object's value
-      blankTask = document.getElementById("blankTask");
-      //alert("Value of new task is " + blankTask.value);
-      addToDo(blankTask.value);
-      blankTask.value="";
-    }
-
-      console.log("In form submit");
-      //on detecting the enter keystroke, get the value of the input element and pass to addToDo()
-      // alert("Keystroke detected");
-      
-      // blankTask = document.getElementById("blankTask");
-      // addToDo(blankTask.val);
-
-      return false;
       
 
     }, false);
 
     }
-    /*taskForm.addEventListener('keyup', function(e){
-      e.preventDefault();
 
-      console.log("In form submit");
-      //on detecting the enter keystroke, get the value of the input element and pass to addToDo()
-      // alert("Keystroke detected");
-      
-      // blankTask = document.getElementById("blankTask");
-      // addToDo(blankTask.val);
-      
-
-    });*/
-
-
-    //console.log(DOM);
-    //displayToDoList();
   }
 
 /* =============== export public methods =============== */
