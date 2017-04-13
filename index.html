@@ -10,6 +10,9 @@
 	<!-- our css -->
 	<link rel="stylesheet" href="./src/css/app.css">
 	<link rel="stylesheet" href="./src/css/panels.css">
+
+	<link rel="stylesheet" href="./src/css/todo.css">
+  
 	<link rel="stylesheet" href="./src/css/weather-icons.min.css"
 	<!-- favicon -->
     <link rel="shortcut icon" type="image/png" href="./src/assets/logopixels.png">
@@ -69,7 +72,7 @@
 		<div class="Grid">
 			<div class="Grid-cell">
 				<div class="userpref">
-					<i class="fa fa-cog" aria-hidden="true">cog</i>
+					<i class="fa fa-cog" aria-hidden="true"></i>
 				</div>
 			</div>
 			<div class="Grid-cell">
@@ -88,75 +91,77 @@
 		<!-- User Preferences Panel -->
 		<div class="userprefpanel">
 
+			<div class="userprefnav">
+				<ul class="settings-nav">
+					<li class="features">Features</li>
+					<li class="theme">Theme</li>
+					<li class="quotes">Quotes</li>
+				</ul>
+			</div>
 
-				<div class="userprefnav">
-					<ul class="settings-nav">
-						<li class="features">Features</li>
-						<li class="theme">Theme</li>
-						<li class="quotes">Quotes</li>
-					</ul>
+			<div class="showfromnav">
+				<div id="userpref-features">
+
+					<h3>Features to Show</h3>
+					<div class="feat">
+						<input type="checkbox" checked="checked" name="todofeat" id="todofeat">
+						<label for="todo">To Do</label><br>
+					</div>
+					<div class="feat">	
+						<input type="checkbox" checked="checked" name="weatherfeat" id="weatherfeat">
+						<label for="weather">Weather</label><br>
+					</div>
+					<div class="feat">
+						<input type="checkbox" checked="true" name="calendarfeat" id="calendarfeat">
+						<label for="calendar">Calendar</label><br>
+					</div>
+					<div class="feat">
+						<input type="checkbox" checked="true" name="quotefeat" id="quotefeat">
+						<label for="quote">Quote</label><br>
+					</div>
+					<div class="feat">
+						<input type="checkbox" checked="true" name="greetingfeat" id="greetingfeat">
+						<label for="greeting">Greeting</label><br>
+					</div>
+					<div class="feat">
+						<input type="checkbox" checked="true" name="timefeat" id="timefeat">
+						<label for="time">Time</label><br>
+					</div>
+					<div class="feat">
+						<input type="checkbox" checked="true" name="aboutfeat" id="aboutfeat">
+						<label for="about">Logo</label>
+					</div>
+
+				</div><!-- end user pref features -->
+
+				<div id="userpref-theme">
+					<h3>Theme</h3>
+					<input class="features" type="radio" name="themedark" id="themedark">
+					<label for="theme">Dark</label>
+					<input class="features" type="radio" name="themelight" id="themelight">
+					<label for="theme">Light</label>
+					<input class="features" type="radio" name="themecolor" id="themecolor">
+					<label for="theme">Colorful</label>
 				</div>
 
-				<div class="showfromnav">
-					<div id="userpref-features">
-						<h3>Features to Show</h3>
-						<div class="feat">
-							<input type="checkbox" checked="checked" name="todofeat" id="todofeat">
-							<label for="todo">To Do</label><br>
-						</div>
-						<div class="feat">	
-							<input type="checkbox" checked="checked" name="weatherfeat" id="weatherfeat">
-							<label for="weather">Weather</label><br>
-						</div>
-						<div class="feat">
-							<input type="checkbox" checked="true" name="calendarfeat" id="calendarfeat">
-							<label for="calendar">Calendar</label><br>
-						</div>
-						<div class="feat">
-							<input type="checkbox" checked="true" name="quotefeat" id="quotefeat">
-							<label for="quote">Quote</label><br>
-						</div>
-						<div class="feat">
-							<input type="checkbox" checked="true" name="greetingfeat" id="greetingfeat">
-							<label for="greeting">Greeting</label><br>
-						</div>
-						<div class="feat">
-							<input type="checkbox" checked="true" name="timefeat" id="timefeat">
-							<label for="time">Time</label><br>
-						</div>
-						<div class="feat">
-							<input type="checkbox" checked="true" name="aboutfeat" id="aboutfeat">
-							<label for="about">Logo</label>
-						</div>
-					</div>
-
-					<div id="userpref-theme">
-						<h3>Theme</h3>
-						<input class="features" type="radio" name="themedark" id="themedark">
-						<label for="theme">Dark</label>
-						<input class="features" type="radio" name="themelight" id="themelight">
-						<label for="theme">Light</label>
-						<input class="features" type="radio" name="themecolor" id="themecolor">
-						<label for="theme">Colorful</label>
-					</div>
-
-					<div id="userpref-quotes">
-						<h3>Quotes</h3>
-						<input class="features" type="radio" name="quotesdesign" value="quotes-design">
-						<label for="theme">On Design</label>
-						<input class="features" type="radio" name="quoteshumor" value="quotes-humor">
-						<label for="theme">Humorous</label>
-					</div>
+				<div id="userpref-quotes">
+					<h3>Quotes</h3>
+					<input class="features" type="radio" name="quotesdesign" value="quotes-design">
+					<label for="theme">On Design</label>
+					<input class="features" type="radio" name="quoteshumor" value="quotes-humor">
+					<label for="theme">Humorous</label>
 				</div>
 
-		</div>
+			</div><!-- end show from nav -->
+
+		</div><!-- end user pref panel -->
 
 		<!-- To Do Panel-->
 		<div class="todopanel">
-			To do<br>To do<br>To do
+			<div id="todoList" class="todo"></div>
 		</div>
 
-	</div>
+	</div><!-- end bottom screen panels -->
 
 
  	<!-- jquery -->
@@ -168,6 +173,7 @@
 	<script src="./src/js/userPref.js"></script>
 	<script src="./src/js/Quotes.js"></script>
 	<script src="./src/js/Weather.js"></script>
+	<script src="src/js/todo.js"></script>
 
 </body>
 </html>
