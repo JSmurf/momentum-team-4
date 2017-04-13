@@ -1,4 +1,5 @@
 /* app.css */
+
 * {
     box-sizing: border-box;
     padding: 0;
@@ -68,11 +69,11 @@ body {
 /* Top of Page */
 header {
 	position: fixed;
-    width: 100%;
-    height: 60px;
-    margin: 0;
-    padding: 0;
-    z-index: 1;
+  width: 100%;
+  height: 60px;
+  margin: 0;
+  padding: 0;
+  z-index: 1;
 }
 .weather {
 	float: left;
@@ -124,6 +125,7 @@ header {
 	position: fixed;
 	display: flex;
 	margin-left: auto;
+
     margin-right: auto;
     margin-top: 14em;
     -webkit-box-flex: 1;
@@ -141,6 +143,7 @@ header {
     justify-content: center;
     text-align: center;
     z-index: -1;
+
 }
 
 .greeting {
@@ -153,11 +156,13 @@ header {
 /* Bottom of Page */
 footer {
 	position: fixed;
+
     width: 100%;
     height: 90px;
     margin: 0;
     padding: 0;
     bottom: 0;
+
 }
 .userpref {
 	float: left;
