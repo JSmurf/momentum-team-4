@@ -1,5 +1,5 @@
 .taskList {
-	overflow: scroll;
+	/*overflow: scroll;*/
 }
 
 .hidden {
@@ -39,12 +39,25 @@ text-decoration:line-through;
   /*For styling <li> DOM elements as tasks */
 }
 
-.task > input {
+.task input[type="text"] {
 
 /*  Alters default input look and feel*/
+	outline: none;
+	background-color: transparent;
+	border: none;
+
 }
 
 .task:hover {
 
   /*Handle task focus highlights*/
+}
+
+.newtask {
+
+	outline: none;
+	background-color: transparent;
+	border: none;
+	color: whitesmoke;
+
 }

@@ -42,7 +42,7 @@ var TaskMod = (function(window, undefined) {
     var blank = document.createElement('input');
     blank.setAttribute('id', 'blankTask');
     blank.setAttribute('type', 'text');
-    blank.className = "form-control";
+    blank.className = "form-control newtask";
     blank.setAttribute('placeholder', 'Add a new task...');
     blank.addEventListener("keypress", bindNewTaskEvent);
     
@@ -64,6 +64,9 @@ var TaskMod = (function(window, undefined) {
 
     console.log(listofToDos);
 
+    //listofToDos.sortable();
+    $("#taskList").sortable();
+    $("#taskList").disableSelection();
    // DOM.$todo.html = listofToDos.outerHTML;
 
     return listofToDos;
@@ -72,7 +75,7 @@ var TaskMod = (function(window, undefined) {
   //Bind task addition to the enter key
   function bindNewTaskEvent(e){
 
-    e.preventDefault();
+    
     //on detecting the enter keystroke, get the value of the input element and pass to addToDo()
     
     var key = e.which || e.keyCode;
@@ -94,7 +97,7 @@ var TaskMod = (function(window, undefined) {
       // blankTask = document.getElementById("blankTask");
       // addToDo(blankTask.val);
 
-      return false;
+      //return false;
 
     
   }
@@ -243,7 +246,10 @@ var TaskMod = (function(window, undefined) {
     //Set up the top level li
     var taskItem = document.createElement('li');
     taskItem.setAttribute("id", this.id);
+    taskItem.className = "ui-state-default task";
 
+    //$(this.id).draggable();
+    
     //Set up the task completed checkbox and bind the completion event
     var taskCmpBtnId = "cmp" + this.id;
     var taskCmpBtn = document.createElement('input');
@@ -258,7 +264,7 @@ var TaskMod = (function(window, undefined) {
     displayTask.setAttribute("type", "text");
     displayTask.value = this.desc;
     displayTask.setAttribute("readonly", "true");//displayTask.readOnly = true;
-    displayTask.addEventListener("click", bindEditToDoEvent);
+    displayTask.addEventListener("dblclick", bindEditToDoEvent);
     displayTask.addEventListener("keypress", bindDoneEditingEvent);
     
     //Set up the trash function and bind the delete event
@@ -272,6 +278,8 @@ var TaskMod = (function(window, undefined) {
     taskItem.appendChild(taskCmpBtn);
     taskItem.appendChild(displayTask);
     taskItem.appendChild(taskDelBtn);
+
+
 
     return taskItem;
 
@@ -320,6 +328,8 @@ var TaskMod = (function(window, undefined) {
     
     //Add the new todo to existing model array for future lookups
     taskArray.push(task);
+
+    $("#taskList").sortable();
 
     //Save the task list to local storage
 
@@ -409,19 +419,7 @@ var TaskMod = (function(window, undefined) {
 
     console.log("Just cached DOM");
 
-    window.onload = function(){
-
-      blank.addEventListener('keypress', function(e){
-      
-
-
-    
-      
-
-    }, false);
-
-    }
-
+   
   }
 
 /* =============== export public methods =============== */
