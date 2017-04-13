@@ -5,9 +5,11 @@ $(document).ready(function () {
   userPref.init();
   Quotes.init();
   Weather.init();
+  TaskMod.init();
+
   //initialize all modules here
   //Weather Module
-  var lon;
+/*  var lon;
   var lat; 
   var temp;
   
@@ -34,7 +36,8 @@ $(document).ready(function () {
     $("#temporary").html(code);
     
     });
-  });
+  });*/
+
 
 
 });
