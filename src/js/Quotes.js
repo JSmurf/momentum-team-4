@@ -2,21 +2,61 @@ var Quotes = (function () {
 
 	'use strict';
 
-  	var DOM = {};
+	var DOM = {};
 
-  	function cacheDom() {
-	  	DOM.$quote = $('.quote');
+	function cacheDom() {
+  	DOM.$quote = $('.quote');
+  	DOM.$userPrefFeatures = $('#userpref-features');
+  	DOM.$userPrefTheme = $('#userpref-theme');
+  	DOM.$userPrefQuotes = $('#userpref-quotes');
 	}
 
+
 	function getQuote() {
-		$.ajax( {
-	      url: 'https://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1',
-	      success: function(data) {
-	        var response = data.shift();
-	        DOM.$quote.html("<h3 class='quote-content'>" + response.content + "</h3>" + "<p class='quote-author'>" + response.title + "</p>");
-	      },
-	      cache: false
+		compscience();
+
+		$('#inspiring').click(function(){
+			DOM.$userPrefQuotes.show();
+			DOM.$userPrefTheme.hide();
+			DOM.$userPrefFeatures.hide();
+			if ($('#inspiring').prop('checked')) {
+				inspirational();
+			}
+		});
+
+		$('#compscience').click(function(){
+			DOM.$userPrefQuotes.show();
+			DOM.$userPrefTheme.hide();
+			DOM.$userPrefFeatures.hide();
+			if ($('#compscience').prop('checked')) {
+				compscience();
+				
+				//$('.quote').html("");
+			}
+		});
+
+		function inspirational() {
+			$.ajax({
+      url: "http://api.forismatic.com/api/1.0/?",
+      dataType: "jsonp",
+      data: "method=getQuote&format=jsonp&lang=en&jsonp=?",
+      success: function( response ) {
+	        DOM.$quote.html("<h3 class='quote-content'>" + response.quoteText + "</h3>" + "<p class='quote-author'>" + response.quoteAuthor + "</p>");
+	      }
   		});
+		}
+
+		function compscience() {
+  		$.ajax({
+      url: "http://quotes.stormconsultancy.co.uk/random.json?",
+      dataType: "json",
+      success: function( data ) {
+      	console.log(data);
+	        DOM.$quote.html("<h3 class='quote-content'>" + data.quote + "</h3>" + "<p class='quote-author'>" + data.author + "</p>");
+	      }
+  		});
+	  }
+
 	}
 
 

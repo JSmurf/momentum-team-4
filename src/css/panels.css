@@ -5,8 +5,8 @@
 
 /* User Pref Panel */
 .userprefpanel {
-	height: 20em;
-	width: 25em;
+	height: 24em;
+	width: 28em;
 	float: left;
 	padding: 10px;
 	margin-left: 10px;
@@ -75,15 +75,12 @@ li:hover {
 	padding: 6px;
 }
 #userpref-features {
-	display: none;
 	padding-bottom: 7px;
 }
 #userpref-theme {
-	display: none;
 	padding-bottom: 7px;
 }
 #userpref-quotes {
-	display: none;
 }
 
 h1 {
@@ -111,8 +108,8 @@ input {
 /* To Do Panel */
 
 .todopanel {
-	height: 20em;
-	width: 25em;
+	height: 24em;
+	width: 28em;
 	float: right;
 	text-align: right;
 	padding: 10px;
