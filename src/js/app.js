@@ -6,6 +6,7 @@ $(document).ready(function () {
   Quotes.init();
   Weather.init();
   TaskMod.init();
+
   //initialize all modules here
-  
+
 });
