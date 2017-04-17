@@ -41,8 +41,10 @@ var Quotes = (function () {
       dataType: "jsonp",
       data: "method=getQuote&format=jsonp&lang=en&jsonp=?",
       success: function( response ) {
+      	if (response.quoteText.length < 181) {
 	        DOM.$quote.html("<h3 class='quote-content'>" + response.quoteText + "</h3>" + "<p class='quote-author'>" + response.quoteAuthor + "</p>");
-	      }
+      	} else { inspirational(); }
+      }
   		});
 		}
 
@@ -51,9 +53,10 @@ var Quotes = (function () {
       url: "http://quotes.stormconsultancy.co.uk/random.json?",
       dataType: "json",
       success: function( data ) {
-      	console.log(data);
+      	if (data.quote.length < 181) {
 	        DOM.$quote.html("<h3 class='quote-content'>" + data.quote + "</h3>" + "<p class='quote-author'>" + data.author + "</p>");
-	      }
+      	} else { compscience(); }
+	    }
   		});
 	  }
 

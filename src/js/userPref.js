@@ -120,7 +120,7 @@ var userPref = (function () {
 			if ($('#themedark').prop('checked')) {
 				$('body').css({
 					"color": "#fff",
-					"background-image": "url('')",
+					"background-image": "url('https://static.pexels.com/photos/26171/pexels-photo.jpg')",
 					"background-color": "black"
 				});
 			}
@@ -133,20 +133,31 @@ var userPref = (function () {
 			if ($('#themelight').prop('checked')) {
 				$('body').css({
 					"color": "#000",
-					"background-image": "url('')",
-					"background-color": "#fff"
+					"background-image": "url('https://static.pexels.com/photos/20974/pexels-photo.jpg')",
+					"background-color": "#fff",
+					"text-shadow": "none"
+				});
+				$('#unit').css({
+					"color": "#000"
+				});
+				$('.quote-content').css({
+					"color": "#000"
+				});
+				$('.quote-author').css({
+					"color": "#000"
 				});
 			}
 		});
 
 		$('#themecolor').click(function(){
+			localStorage.setItem("theme","colorful");
 			DOM.$userPrefTheme.show();
 			DOM.$userPrefQuotes.hide();
 			DOM.$userPrefFeatures.hide();
 			if ($('#themecolor').prop('checked')) {
 				$('body').css({
 					"color": "#fff",
-					"background-image": "url('')",
+					"background-image": "url('http://www.publicdomainpictures.net/pictures/120000/velka/rainbow-colors-background.jpg')",
 					"background-color": "red"
 				});
 			}
@@ -154,8 +165,24 @@ var userPref = (function () {
 
 	}
 
+	localStorage.setItem("theme",null);
+
+	function localstorage() {
+		//if(typeof(Storage) !== "undefined") {
+			localStorage.getItem("theme");
+        if ("theme" === "colorful") {
+            $('body').css({
+							"color": "#fff",
+							"background-image": "url('http://www.publicdomainpictures.net/pictures/120000/velka/rainbow-colors-background.jpg')",
+							"background-color": "red"
+						});
+        }
+    //}
+	}
+
 	function init() {
 		cacheDom();
+		localstorage();
 		userPrefNav();
 		featuresCheck();
 		selectTheme();
