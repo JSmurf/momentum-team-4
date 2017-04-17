@@ -1,9 +1,14 @@
 /* /src/js/todo.js */
 
+/*
+Commented out .sortable() at lines 68, 335 and disableSelection() at 71 in order to get code to run
+-Traci
+*/
+
 /*Author: Joshua E. Thomas
 NOTE: Depends on jQuery and jQuery UI (for reordering ToDo entries*/
 
-var TaskMod = (function(window, undefined) {
+var taskMod = (function(window, undefined) {
   var DOM = {};
   var listofToDos;
   var taskArray = []; //Array Model for storing ToDo objects 
@@ -65,8 +70,8 @@ var TaskMod = (function(window, undefined) {
     console.log(listofToDos);
 
     //listofToDos.sortable();
-    $("#taskList").sortable();
-    $("#taskList").disableSelection();
+    //$("#taskList").sortable();
+    //$("#taskList").disableSelection();
    // DOM.$todo.html = listofToDos.outerHTML;
 
     return listofToDos;
@@ -329,7 +334,7 @@ var TaskMod = (function(window, undefined) {
     //Add the new todo to existing model array for future lookups
     taskArray.push(task);
 
-    $("#taskList").sortable();
+    //$("#taskList").sortable();
 
     //Save the task list to local storage
 
