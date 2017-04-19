@@ -30,16 +30,26 @@ var userPref = (function () {
 
 	function userPrefNav() {
 
+		DOM.$userPrefFeatures.show();
+		DOM.$userPrefTheme.hide();
+		DOM.$userPrefQuotes.hide();
+
 		DOM.$features.click(function() {
-			DOM.$userPrefFeatures.toggle();
+			DOM.$userPrefFeatures.show();
+			DOM.$userPrefTheme.hide();
+			DOM.$userPrefQuotes.hide();
 		});
 
 		DOM.$theme.click(function() {
-			DOM.$userPrefTheme.toggle();
+			DOM.$userPrefTheme.show();
+			DOM.$userPrefQuotes.hide();
+			DOM.$userPrefFeatures.hide();
 		});
 
 		DOM.$quotes.click(function() {
-			DOM.$userPrefQuotes.toggle();
+			DOM.$userPrefQuotes.show();
+			DOM.$userPrefFeatures.hide();
+			DOM.$userPrefTheme.hide();
 		});
 
 	}
@@ -98,57 +108,81 @@ var userPref = (function () {
 		});
 
 
-		
-		
-		//if (DOM.$toDoFeat.checked === true) { console.log('checked'); DOM.$toDo.show(); }
-		//if (DOM.$toDoFeat.checked === false) { console.log('notchecked'); DOM.$toDo.hide(); }
-
 	}
 
 
 	function selectTheme() {
 
 		$('#themedark').click(function(){
+			DOM.$userPrefTheme.show();
+			DOM.$userPrefQuotes.hide();
+			DOM.$userPrefFeatures.hide();
 			if ($('#themedark').prop('checked')) {
 				$('body').css({
 					"color": "#fff",
-					"background-image": "url('')",
+					"background-image": "url('https://static.pexels.com/photos/26171/pexels-photo.jpg')",
 					"background-color": "black"
 				});
-				//how to make sure only one radio checked?????????
-				$('#themelight').prop('checked') = false;
-				$('#themecolor').prop('checked') = false;
 			}
 		});
 
 		$('#themelight').click(function(){
+			DOM.$userPrefTheme.show();
+			DOM.$userPrefQuotes.hide();
+			DOM.$userPrefFeatures.hide();
 			if ($('#themelight').prop('checked')) {
 				$('body').css({
 					"color": "#000",
-					"background-image": "url('')",
-					"background-color": "#fff"
+					"background-image": "url('https://static.pexels.com/photos/20974/pexels-photo.jpg')",
+					"background-color": "#fff",
+					"text-shadow": "none"
 				});
-				$('#themedark').prop('checked') = false;
-				$('#themecolor').prop('checked') = false;
+				$('#unit').css({
+					"color": "#000"
+				});
+				$('.quote-content').css({
+					"color": "#000"
+				});
+				$('.quote-author').css({
+					"color": "#000"
+				});
 			}
 		});
 
 		$('#themecolor').click(function(){
+			localStorage.setItem("theme","colorful");
+			DOM.$userPrefTheme.show();
+			DOM.$userPrefQuotes.hide();
+			DOM.$userPrefFeatures.hide();
 			if ($('#themecolor').prop('checked')) {
 				$('body').css({
 					"color": "#fff",
-					"background-image": "url('')",
+					"background-image": "url('http://www.publicdomainpictures.net/pictures/120000/velka/rainbow-colors-background.jpg')",
 					"background-color": "red"
 				});
-				$('#themelight').prop('checked') = false;
-				$('#themedark').prop('checked') = false;
 			}
 		});
 
 	}
 
+	localStorage.setItem("theme",null);
+
+	function localstorage() {
+		//if(typeof(Storage) !== "undefined") {
+			localStorage.getItem("theme");
+        if ("theme" === "colorful") {
+            $('body').css({
+							"color": "#fff",
+							"background-image": "url('http://www.publicdomainpictures.net/pictures/120000/velka/rainbow-colors-background.jpg')",
+							"background-color": "red"
+						});
+        }
+    //}
+	}
+
 	function init() {
 		cacheDom();
+		localstorage();
 		userPrefNav();
 		featuresCheck();
 		selectTheme();

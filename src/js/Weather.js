@@ -27,22 +27,26 @@ var Weather = (function () {
       $("#weatherIcon").addClass("wi wi-owm-" + code);
       $("#temporary").html(code);
 
+      var temp = "f";
+
       $("#unit").on("click", function(){      
-       if (toggle === false){
-         $("#temp").html(listC);
-         toggle = true;
-       }
-       else {
-         $("#temp").html(listF);
-         toggle = false;
+       if (temp === "f"){
+        $("#weatherTemperature").html("");
+         $("#weatherTemperature").html(listC);
+         temp = "c";
+       } else {
+        $("#weatherTemperature").html("");
+         $("#weatherTemperature").html(listF);
+         temp = "f";
        }
       
       });
     });
-
   });
 
   }
+
+  
 
   function init() {
     getWeather();
