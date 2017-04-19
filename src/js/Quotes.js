@@ -11,17 +11,6 @@ var Quotes = (function () {
   	DOM.$userPrefQuotes = $('#userpref-quotes');
 	}
 
-	function localstorage() {
-		var quotechoice = localStorage.getItem("quotes");
-
-		if (quotechoice === "inspiring") {
-			inspirational();
-		} else if (quotechoice === "compsci") {
-			compscience();
-		}
-
-	}
-
 	function getQuote() {
 		//default
 		compscience();
@@ -71,13 +60,24 @@ var Quotes = (function () {
   		});
 	  }
 
+		  function localstorage() {
+			var quotechoice = localStorage.getItem("quotes");
+
+				if (quotechoice === "inspiring") {
+					inspirational();
+				} else if (quotechoice === "compsci") {
+					compscience();
+				}
+
+		}
+
 	}
 
 
 	function init() {
 		cacheDom();
 		getQuote();
-		localstorage();
+		//localstorage();
 	}
 
 	return {
