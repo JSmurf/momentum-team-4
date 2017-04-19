@@ -3,10 +3,11 @@
 /*Author: Joshua E. Thomas
 NOTE: Depends on jQuery and jQuery UI (for reordering ToDo entries*/
 
-var TaskMod = (function(window, undefined) {
+var TaskMod = (function() {
   var DOM = {};
   var listofToDos;
   var taskArray = []; //Array Model for storing ToDo objects 
+  var taskViewOrder = []; //Array Model for storing view order of elements
       
 
   /* =================== private methods ================= */
@@ -44,6 +45,7 @@ var TaskMod = (function(window, undefined) {
     blank.setAttribute('type', 'text');
     blank.className = "form-control newtask";
     blank.setAttribute('placeholder', 'Add a new task...');
+    blank.setAttribute('autocomplete', 'off');
     blank.addEventListener("keypress", bindNewTaskEvent);
     
     // taskForm.appendChild(blank);
@@ -54,22 +56,78 @@ var TaskMod = (function(window, undefined) {
     listofToDos.appendChild(dummy);
 
     //Check if localStorage already has a task list. If not, create an empty task list. If it does, pull the task list. In either case, add it to a ul DOM element and return it so the DOM can be cached.
-    if(localStorage.getItem("taskList")){
+    if(localStorage.getItem("taskModel")&&(localStorage.getItem("taskViewOrder"))){
 
-      var i;
-      var taskList;
-      taskList = localStorage.getItem("taskList");
-      listofToDos.innerHTML = taskList;
+      
+      taskArray = JSON.parse(localStorage.getItem("taskModel"));
+      console.log(JSON.stringify(taskArray));
+      
+      taskViewOrder = JSON.parse(localStorage.getItem("taskViewOrder"));
+      console.log(JSON.stringify(taskViewOrder));
+
+      //console.log(listofToDos.outerHTML);
+
+      //rebuild the tasks
+      console.log("Rebuilding task tree");
+      rebuildTaskView();
+      console.log("Rebuild completed");
     } 
 
     console.log(listofToDos);
 
-    //listofToDos.sortable();
+    //Make the task list sortable
     $("#taskList").sortable();
     $("#taskList").disableSelection();
-   // DOM.$todo.html = listofToDos.outerHTML;
+   
 
     return listofToDos;
+  }
+
+  //Rebuild the task list from localstorage
+  function rebuildTaskView() {
+
+    //For each object in taskmodel, update the view element to the last known setting
+
+    var i;
+
+    console.log("Task view order length is " + taskViewOrder.length);
+    for(i = 0; i < taskViewOrder.length; i++){
+      
+      var currID = taskViewOrder[i];
+      
+      console.log(JSON.stringify(taskArray[lookupTask(currID)]));
+      // console.log(JSON.stringify(taskArray[lookupTask(currID)]));
+
+      if(lookupTask(currID) != -1) {
+
+        taskArray[lookupTask(currID)].render = renderToDo;
+        taskArray[lookupTask(currID)].toggle = toggleToDo;
+        taskArray[lookupTask(currID)].setDesc = setToDoDesc;
+      } else {
+
+        continue;
+      }
+
+      //console.log("Current task is: " + taskArray[lookupTask(currID)].render().outerHTML);
+
+    //Set the event listeners of all checkbox, input and button elements based on class name via render()
+      listofToDos.appendChild(taskArray[lookupTask(currID)].render());
+      $("#taskList").sortable();
+
+    }
+    
+
+    
+
+
+  }
+
+
+  // Save task list model and view
+  function saveList() {
+
+    localStorage.setItem("taskModel", JSON.stringify(taskArray));
+    localStorage.setItem("taskViewOrder", JSON.stringify(taskViewOrder));
   }
 
   //Bind task addition to the enter key
@@ -102,6 +160,29 @@ var TaskMod = (function(window, undefined) {
     
   }
 
+  //Bind task movement to regenerate view order
+  function bindTaskMoveEvent(e){
+
+    //Reset the task view list
+    taskViewOrder = [];    
+    var i;
+
+    //Get all li elements associated with our task list
+    var list = listofToDos.getElementsByTagName("li");
+    console.log(JSON.stringify(list));
+    for(i=1; i < list.length; i++){
+
+      //Push the id of each task onto the view array
+      console.log("Pushing ID " + list[i].id + " onto view order");
+      taskViewOrder.push(list[i].id);
+    }
+
+    console.log("New view order is " + JSON.stringify(taskViewOrder));
+
+    saveList();
+
+  } 
+
   function bindCompletionEvent(e){
 
     //on marking a todo as completed we should set its state and strikeout its description
@@ -132,32 +213,16 @@ var TaskMod = (function(window, undefined) {
     }
     
     //Set completion state on the target task and update the taskArray model
-    console.log("Task ID is " + parentTask.parentNode.id);
-    console.log("Before" + JSON.stringify(taskArray));
+
+    // console.log("Task ID is " + parentTask.parentNode.id);
+    // console.log("Before" + JSON.stringify(taskArray));
     taskArray[lookupTask(parentTask.parentNode.id)].toggle();
-    console.log("After" + JSON.stringify(taskArray));
+    // console.log("After" + JSON.stringify(taskArray));
     //console.log("Task Array obect completion state is " + taskArray[lookupTask(parentTask.parentNode.id)].completed);
 
-    //Save the tasklst to localStorage
+    //Save the tasklist to localStorage
+    saveList();
 
-  }
-
-  function bindUncompletionEvent(e){
-
-    //upon deselecting a todo as completed we should remove its text decoration and restore it as a normal task
-
-    e.preventDefault();
-
-    //Get the parent node's ID and use that to find the associated task input
-    
-
-    //Add click and keypress handlers for editing 
-
-    //Remove the completed class 
-
-    //Update the taskArray model
-
-    //Save the tasklst to localStorage
   }
 
   function bindTaskRemovalEvent(e){
@@ -223,6 +288,7 @@ var TaskMod = (function(window, undefined) {
       taskArray[lookupTask(parentTask.parentNode.id)].setDesc(parentTask.value);
 
       //Save the task list to local storage
+      saveList();
 
     }
   }
@@ -247,6 +313,7 @@ var TaskMod = (function(window, undefined) {
     var taskItem = document.createElement('li');
     taskItem.setAttribute("id", this.id);
     taskItem.className = "ui-state-default task";
+    taskItem.addEventListener("drop", bindTaskMoveEvent);
 
     //$(this.id).draggable();
     
@@ -255,6 +322,11 @@ var TaskMod = (function(window, undefined) {
     var taskCmpBtn = document.createElement('input');
     taskCmpBtn.setAttribute("type", "checkbox");
     taskCmpBtn.setAttribute("id", taskCmpBtnId);
+    taskCmpBtn.className = "taskCheckBox";
+    //Check state of the task and marked checked if necessary
+    if(this.completed){
+      taskCmpBtn.checked = true;
+    }
     taskCmpBtn.addEventListener("change", bindCompletionEvent);
 
     //Set up the task input and bind the edit event
@@ -263,14 +335,23 @@ var TaskMod = (function(window, undefined) {
     displayTask.setAttribute("id", taskInputId);
     displayTask.setAttribute("type", "text");
     displayTask.value = this.desc;
-    displayTask.setAttribute("readonly", "true");//displayTask.readOnly = true;
+    displayTask.setAttribute("readonly", "true");//displayTask.readOnly = true apparently you can only set this when the attribute is dropped in with setAttribute
+    displayTask.setAttribute("autocomplete", "off");
+    displayTask.className = "taskDesc";
+    //Check state of the task and strikeout text if necessary. Also conditionally bind edit event
+    if(this.completed){
+      displayTask.classList.add("completed");
+    }else{
+
     displayTask.addEventListener("dblclick", bindEditToDoEvent);
+    }
     displayTask.addEventListener("keypress", bindDoneEditingEvent);
     
     //Set up the trash function and bind the delete event
     var taskDelBtnID = "del" + this.id;
     var taskDelBtn = document.createElement('button');
     taskDelBtn.setAttribute("id", taskDelBtnID);
+    taskDelBtn.className = "taskTrash";
     taskDelBtn.innerHTML = "<i class='fa fa-trash-o' aria-hidden='true'></i>";
     taskDelBtn.addEventListener("click", bindTaskRemovalEvent);
 
@@ -278,8 +359,6 @@ var TaskMod = (function(window, undefined) {
     taskItem.appendChild(taskCmpBtn);
     taskItem.appendChild(displayTask);
     taskItem.appendChild(taskDelBtn);
-
-
 
     return taskItem;
 
@@ -306,10 +385,6 @@ var TaskMod = (function(window, undefined) {
 
   }
 
-  //Update the task list stored in the browser for every addition, completion, or deletion action
-  function saveTaskListLocal(){
-
-  }
 
   //Add a todo manually
   function addToDo(name){
@@ -329,9 +404,13 @@ var TaskMod = (function(window, undefined) {
     //Add the new todo to existing model array for future lookups
     taskArray.push(task);
 
+    //Push the task ID to the taskViewOrder
+    taskViewOrder.push(task.id);
+
     $("#taskList").sortable();
 
     //Save the task list to local storage
+    saveList();
 
   }
 
@@ -362,9 +441,19 @@ var TaskMod = (function(window, undefined) {
   //Remove undefined references from array to enable clean interation
   function cleanUpTasks(){
 
-    taskArray = taskArray.filter(function(task){
+    taskArray = taskArray.filter(function(taskModel){
 
-      if(task!== undefined){
+      if(taskModel!== undefined){
+
+        return true;
+      }
+
+      return false;
+    });
+
+    taskViewOrder = taskViewOrder.filter(function(taskView){
+
+      if(taskView!== undefined){
 
         return true;
       }
@@ -386,13 +475,17 @@ var TaskMod = (function(window, undefined) {
     var parentTask = document.getElementById(parentTaskID);
     parentTask.parentNode.removeChild(parentTask);
 
-    //Lookup and remove the associated task from the task array
-    delete taskArray[lookupTask(parentTaskID)];
+    //Lookup and remove the associated task from the task array and view Order
+    
+    var delTaskID = lookupTask(parentTaskID);
+    delete taskArray[delTaskID];
+    delete taskViewOrder[delTaskID];
 
     //Reload taskArray to remove 'undefined' references
     cleanUpTasks();
 
-    //Save the task list to local storage 
+    //Save the task list to local storage
+    saveList(); 
   }
 
 
@@ -417,7 +510,7 @@ var TaskMod = (function(window, undefined) {
   function init() {
     cacheDom();
 
-    console.log("Just cached DOM");
+    //console.log("Just cached DOM");
 
    
   }
@@ -427,4 +520,4 @@ var TaskMod = (function(window, undefined) {
     init: init
     //displayToDoList: displayToDoList
   };
-}(window));
+}());

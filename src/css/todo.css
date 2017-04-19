@@ -10,8 +10,14 @@
 .completed {
 
 /*For tasks marked as completed*/
-text-decoration:line-through;
+	text-decoration:line-through;
 
+}
+
+.editing {
+
+/*For tasks currently being edited*/
+	background-color: whitesmoke;
 }
 
 .category-important {
@@ -59,5 +65,20 @@ text-decoration:line-through;
 	background-color: transparent;
 	border: none;
 	color: whitesmoke;
+
+}
+
+.taskCheckbox {
+
+
+}
+
+.taskDesc {
+
+
+}
+
+.taskTrash {
+
 
 }
