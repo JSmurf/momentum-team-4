@@ -5,7 +5,8 @@ $(document).ready(function () {
   userPref.init();
   Quotes.init();
   Weather.init();
-  taskMod.init();
+  TaskMod.init();
+
   //initialize all modules here
-  
+
 });
