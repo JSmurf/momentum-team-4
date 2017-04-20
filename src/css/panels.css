@@ -10,7 +10,7 @@
 	float: left;
 	padding: 10px;
 	margin-left: 10px;
-	margin-top: 20%;
+	margin-top: 18%;
 	display: none;
 	background: rgba(0, 0, 0, .8);
 	color: white;
@@ -108,17 +108,17 @@ input {
 /* To Do Panel */
 
 .todopanel {
-	height: 24em;
-	width: 28em;
+	height: 20em;
+	width: 22em;
 	float: right;
-	text-align: right;
 	padding: 10px;
 	margin-right: 10px;
-	margin-top: 20%;
+	margin-top: 18%;
 	display: none;
 	background: rgba(0, 0, 0, .9);
 	color: white;
-	z-index: 2;
+	z-index: 999;
+	resize: vertical;
 	overflow-y: scroll;
 }
 
@@ -129,13 +129,61 @@ input {
 	width: 28em;
 	float: center;
 	padding: 10px;
+	padding-top: 3.85em;
 	margin-left: auto;
   margin-right: auto;
-	margin-top: 10px;
+	margin-top: 0;
 	display: none;
 	background: rgba(0, 0, 0, .9);
 	color: white;
 	z-index: 2;
+	resize: vertical;
+}
+.developers, .chingu, .buildto {
+	text-align: center;
+}
+.developers {
+	font-size: 1.2em;
+	padding: 0;
+}
+.chingu {
+	font-size: .8em;
+	padding: 0;
+}
+.buildto {
+	font-size: .7em;
+	padding-bottom: 3em;
+}
+.dev {
+	display: inline-block;
+	width: 100%;
+	padding-bottom: 7px;
+}
+.devimg {
+	float: left;
+	margin-left: 25%;
+	border-radius: 50%;
+	border: 2px solid #fff;
+	height: 62px;
+	width: 62px;
+}
+.name, .place, #github {
+	float: right;
+	width: 50%;
+	text-align: left;
+}
+.name {
+	font-size: 1.1em;
+}
+.place {
+	font-size: .85em;
+}
+#github {
+	font-size: 1.3em;
+	color: rgb(240,150,16);
+}
+#github:hover {
+	color: rgb(69,128,168);
 }
 
 /* Calendar Panel */
@@ -186,5 +234,11 @@ input {
 	}
 	.aboutpanel {
 		height: 22em;
+	}
+	.userpref {
+		margin-top: 15%;
+	}
+	.todo {
+		margin-top: 15%;
 	}
 }
