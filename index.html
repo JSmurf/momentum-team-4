@@ -1,3 +1,8 @@
+<!-- to do:
+	...trash icons. media queries for panels. more options. 
+	!!theme chosen, reverts to features shown issue. 
+	keep inputs' state when reload???
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,18 +10,17 @@
 	<title>Neckerest</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<!-- fonts -->
-	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Cormorant" rel="stylesheet">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	<!-- our css -->
 	<link rel="stylesheet" href="./src/css/app.css">
 	<link rel="stylesheet" href="./src/css/panels.css">
-
 	<link rel="stylesheet" href="./src/css/todo.css">
-  
-	<link rel="stylesheet" href="./src/css/weather-icons.min.css">
+  <!-- weather icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css">
+
 	<!-- favicon -->
   <link rel="shortcut icon" type="image/png" href="./src/assets/logopixels.png">
-
 </head>
 <body>
 	<div class="backgroundImg"></div>
@@ -36,7 +40,7 @@
 			</div>
 			<div class="Grid-cell">
 				<div class="about">
-					<img src="./src/assets/logopixels.png" alt="Neckerest logo" style="width:65px;height:65px;">
+					<img src="./src/assets/logopixels.png" alt="Neckerest logo" style="width:60px;height:60px;">
 				</div>
 			</div>
 			<div class="Grid-cell">
@@ -47,8 +51,29 @@
 
 	<div class="top-panels">
 		<!-- About Panel -->
-		<div class="aboutpanel">
-		</div>
+			<div class="aboutpanel">
+			<h2 class="developers">Neckerest</h2>
+			<h4 class="chingu">Chingu Cohorts : Team Giraffes</h4>
+			<h4 class="buildto">build.to.learn Spring 2017</h4>
+			<div class="dev">
+				<img src="https://dl.dropboxusercontent.com/s/x0z2nnnygvhodg8/alexcoopermomentum.jpg?dl=0" height="50" width="50" class="devimg">
+        <p class="name">Alex Cooper</p>
+        <p class="place">Ithaca, New York</p>
+        <a href="https://github.com/JSmurf" target="_blank"><i class="fa fa-github" id="github"></i></a>
+			</div>
+			<div class="dev">
+				<img src="https://avatars1.githubusercontent.com/u/15716130?v=3&s=460" alt="developerimg" height="50" width="50" class="devimg">
+        <p class="name">Traci Cremeans</p>
+        <p class="place">Hartford, Connecticut</p>
+        <a href="https://github.com/icartusacrimea" target="_blank"><i class="fa fa-github" id="github"></i></a>
+			</div>
+			<div class="dev">
+				<img src="https://pbs.twimg.com/profile_images/849141208098021376/uWz9IZVh_400x400.jpg" alt="developerimg" height="50" width="50" class="devimg">
+        <p class="name">Joshua Thomas</p>
+        <p class="place">Kingston, Jamaica</p>
+        <a href="https://github.com/fujishimak" target="_blank"><i class="fa fa-github" id="github"></i></a>
+			</div>
+	</div>
 
 		<!-- Calendar Panel -->
 		<div class="calendarpanel">
@@ -59,10 +84,11 @@
 
 	<!-- Middle of Screen Area -->
 	<div id="middle">
+		<div class="date">4/16/17</div>
 
 		<div class="greeting">Good time of day, you!</div>
 
-		<div class="time">00:00AM</div>
+		<div class="time"><span class="hours">00:00</span><span class="ap">AM</span></div>
 
 	</div>
 
@@ -77,11 +103,12 @@
 			</div>
 			<div class="Grid-cell">
 				<div class="quote">
-					
+
 				</div>
 			</div>
 			<div class="Grid-cell">
-				<div class="todo">To Do</div>
+				<div class="todobutton">To Do
+				</div>
 			</div>
 		</div>
 	</footer>
@@ -136,20 +163,25 @@
 
 				<div id="userpref-theme">
 					<h3>Theme</h3>
-					<input class="features" type="radio" name="themedark" id="themedark">
+
+					<input class="features" type="radio" name="theme" id="themedark">
 					<label for="theme">Dark</label>
-					<input class="features" type="radio" name="themelight" id="themelight">
+					<input class="features" type="radio" name="theme" id="themelight">
 					<label for="theme">Light</label>
-					<input class="features" type="radio" name="themecolor" id="themecolor">
+					<input class="features" type="radio" name="theme" id="themecolor">
 					<label for="theme">Colorful</label>
+					<input class="features" type="radio" name="theme" id="themestars">
+					<label for="theme">Stars</label>
 				</div>
 
 				<div id="userpref-quotes">
 					<h3>Quotes</h3>
-					<input class="features" type="radio" name="quotesdesign" value="quotes-design">
-					<label for="theme">On Design</label>
-					<input class="features" type="radio" name="quoteshumor" value="quotes-humor">
-					<label for="theme">Humorous</label>
+
+					<input class="features" type="radio" id="inspiring" name="quotes">
+					<label for="theme">Inspiring</label>
+					<input class="features" type="radio" id="compscience" name="quotes">
+					<label for="theme">Computer Science</label>
+
 				</div>
 
 			</div><!-- end show from nav -->
@@ -158,14 +190,17 @@
 
 		<!-- To Do Panel-->
 		<div class="todopanel">
+
 			<div id="todoList" class="todo"></div>
 		</div>
 
+
 	</div><!-- end bottom screen panels -->
 
-
- 	<!-- jquery -->
+ 	<!-- vendor javascript -->
 	<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
 
 	<!-- our javascript -->
 	<script src="./src/js/app.js"></script>
@@ -173,7 +208,8 @@
 	<script src="./src/js/userPref.js"></script>
 	<script src="./src/js/Quotes.js"></script>
 	<script src="./src/js/Weather.js"></script>
-	<script src="./src/js/todo.js"></script>
+	<script src="src/js/TaskMod.js"></script>
+
 
 </body>
 </html>
