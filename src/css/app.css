@@ -172,7 +172,7 @@ footer {
     color: white;
     z-index: -2;
 }
-.todo {
+.todobutton {
 	float: right;
     margin-top: 14%;
 	padding-right: 10px;
@@ -185,7 +185,7 @@ footer {
 	text-shadow: none;
 	cursor: pointer;
 }
-.todo:hover {
+.todobutton:hover {
 	color: rgb(69,128,168);
 	text-shadow: none;
 	cursor: pointer;

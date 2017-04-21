@@ -28,7 +28,7 @@ var userPref = (function () {
 
 		var theme = localStorage.getItem("theme");
 		var features = localStorage.getItem("features");
-		console.log(features);
+		if((theme != null)&&(features != null)){
 
 		if (features.indexOf("todo") === -1) {
 			DOM.$toDo.hide();
@@ -87,6 +87,7 @@ var userPref = (function () {
 					"background-color": "#005460"
 				});
 		}
+	}
 		
 	}
 
