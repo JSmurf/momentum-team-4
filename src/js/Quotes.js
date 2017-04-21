@@ -13,7 +13,7 @@ var Quotes = (function () {
 
 	function getQuote() {
 		//default
-		compscience();
+		inspirational();
 
 		$('#inspiring').click(function(){
 			DOM.$userPrefQuotes.show();
