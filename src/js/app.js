@@ -7,6 +7,4 @@ $(document).ready(function () {
   Weather.init();
   TaskMod.init();
 
-  //initialize all modules here
-
 });

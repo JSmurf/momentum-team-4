@@ -15,6 +15,7 @@ input {
 	color: white;
 	font-size: 1.2em;
 }
+
 .hidden {
 
 /*For tasks that are completed and chosen to be hidden from view*/
@@ -23,7 +24,15 @@ input {
 .completed {
 
 /*For tasks marked as completed*/
-text-decoration:line-through;
+
+	text-decoration:line-through;
+
+}
+
+.editing {
+
+/*For tasks currently being edited*/
+	background-color: whitesmoke;
 
 }
 
@@ -48,7 +57,9 @@ text-decoration:line-through;
 }
 
 .task {
-	color: white;
+
+	/*color: white;*/
+
   /*For styling <li> DOM elements as tasks */
 }
 
@@ -73,6 +84,7 @@ text-decoration:line-through;
 	border: none;
 	color: whitesmoke;
 
+
 }
 
 .fa-trash-o {
@@ -83,4 +95,5 @@ text-decoration:line-through;
 .fa-trash-o::before{
     background: black;
     border: none;
+
 }
