@@ -21,9 +21,9 @@ var Panels = (function () {
 		    DOM.$userPrefPanel.toggle();    
 		});
 
-		/*DOM.$toDo.click(function() {   
+		DOM.$toDo.click(function() {   
 		    DOM.$toDoPanel.toggle();     
-		});*/
+		});
 
 		DOM.$calendar.click(function() {
 			DOM.$calendarPanel.toggle();
