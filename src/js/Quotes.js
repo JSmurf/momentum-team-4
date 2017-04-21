@@ -11,8 +11,8 @@ var Quotes = (function () {
   	DOM.$userPrefQuotes = $('#userpref-quotes');
 	}
 
-
 	function getQuote() {
+		//default
 		compscience();
 
 		$('#inspiring').click(function(){
@@ -20,6 +20,7 @@ var Quotes = (function () {
 			DOM.$userPrefTheme.hide();
 			DOM.$userPrefFeatures.hide();
 			if ($('#inspiring').prop('checked')) {
+				localStorage.setItem("quotes", "inspiring");
 				inspirational();
 			}
 		});
@@ -29,9 +30,8 @@ var Quotes = (function () {
 			DOM.$userPrefTheme.hide();
 			DOM.$userPrefFeatures.hide();
 			if ($('#compscience').prop('checked')) {
+				localStorage.setItem("quotes", "compsci");
 				compscience();
-				
-				//$('.quote').html("");
 			}
 		});
 
@@ -60,12 +60,24 @@ var Quotes = (function () {
   		});
 	  }
 
+		  function localstorage() {
+			var quotechoice = localStorage.getItem("quotes");
+
+				if (quotechoice === "inspiring") {
+					inspirational();
+				} else if (quotechoice === "compsci") {
+					compscience();
+				}
+
+		}
+
 	}
 
 
 	function init() {
 		cacheDom();
 		getQuote();
+		//localstorage();
 	}
 
 	return {

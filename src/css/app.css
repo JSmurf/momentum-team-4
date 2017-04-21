@@ -5,6 +5,7 @@
     padding: 0;
     margin: 0;
     border: 0;
+    font-family: 'Cormorant', serif;
 }
 
 html,
@@ -15,19 +16,18 @@ body {
 body {
 	/* fonts */
     font-family: 'Roboto', 'Arial', sans-serif;
-    font-size: 1rem;
-	color: #FFF;
-	text-shadow: 0px 1px #000;
+    font-size: 1.1rem;
+	color: #FFF7CD;
+	text-shadow: 3px 3px 5px rgba(0, 0, 0, 1);
     overflow:hidden;
 
 	/* default background */
-	background-image: url("http://wallpapercave.com/wp/6SLzBEY.jpg");
+	background-image: url("https://static.pexels.com/photos/353423/pexels-photo-353423.jpeg");
 	background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 	background-color: grey;
-
 	display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -61,12 +61,9 @@ header {
 }
 #unit {
     background: transparent;
-    color: white;
+    color: #FFF7CD;
     cursor: pointer;
-    font-size: .7em;
-}
-#unit:hover {
-    color: blue;
+    font-size: .6em;
 }
 .about {
 	float: center;
@@ -77,7 +74,7 @@ header {
 .about > img {
 	border-radius: 50%;
 	float: center;
-	border: 3px solid black;
+	border: 2px solid black;
 }
 .calendar {
 	float: right;
@@ -88,6 +85,9 @@ header {
 	color: rgb(69,128,168);
 	text-shadow: none;
 	cursor: pointer;
+}
+#unit:hover {
+    rgb(69,128,168);
 }
 .about > img:hover {
 	cursor: pointer;
@@ -105,7 +105,6 @@ header {
 	position: fixed;
 	display: flex;
 	margin-left: auto;
-
     margin-right: auto;
     margin-top: 14em;
     -webkit-box-flex: 1;
@@ -123,55 +122,55 @@ header {
     justify-content: center;
     text-align: center;
     z-index: -1;
-
 }
-
+.date {
+    font-size: 1.6em;
+}
 .greeting {
-	font-size: 3rem;
+	font-size: 3.1em;
 }
-.time {
-	font-size: 4rem;
+.hours {
+	font-size: 2.6em;
+}
+.ap {
+    font-size: 1em;
 }
 
 /* Bottom of Page */
 footer {
 	position: fixed;
-
     width: 100%;
     height: 90px;
     margin: 0;
     padding: 0;
     bottom: 0;
-
 }
 .userpref {
 	float: left;
-    margin-top: 11%;
+    margin-top: 12%;
 	padding-left: 10px;
 	padding-bottom: 0;
     margin-bottom: 0;
-	font-size: 2rem;
+	font-size: 1.4rem;
 }
 .quote {
 	float: center;
 	text-align: center;
-	opacity: .86;
 	width: 100%;
     height: 100%;
 	padding-bottom: 20em;
-    z-index: -1;
 }
 .quote-content {
 	font-size: 1em;
 	font-weight: 200;
-    z-index: -1;
     color: white;
+    z-index: -2;
 }
 .quote-author {
 	font-size: .8em;
 	font-weight: 200;
-    z-index: -1;
     color: white;
+    z-index: -2;
 }
 .todo {
 	float: right;
@@ -185,10 +184,20 @@ footer {
 	color: rgb(69,128,168);
 	text-shadow: none;
 	cursor: pointer;
-	font-size: 2rem;
 }
 .todo:hover {
 	color: rgb(69,128,168);
 	text-shadow: none;
 	cursor: pointer;
+}
+@media (max-device-width: 500px) {
+    .userpref {
+        margin-top: 23%;
+    }
+    .todo {
+        margin-top: 23%;
+    }
+    .greeting {
+        font-size: 2.4em;
+    }
 }
