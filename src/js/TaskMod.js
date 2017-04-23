@@ -1,4 +1,4 @@
-/* /src/js/todo.js */
+/* /src/js/TaskMod.js */
 
 /*Author: Joshua E. Thomas
 NOTE: Depends on jQuery and jQuery UI (for reordering ToDo entries*/
