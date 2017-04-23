@@ -6,5 +6,6 @@ $(document).ready(function () {
   Quotes.init();
   Weather.init();
   TaskMod.init();
+  Greeting.init();
 
 });
