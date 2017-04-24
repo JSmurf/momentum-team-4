@@ -6,5 +6,12 @@ $(document).ready(function () {
   userPref.init();
   Quotes.init();
   Weather.init();
+<<<<<<< HEAD
   Calendar.init();
 });
+=======
+  TaskMod.init();
+  Greeting.init();
+
+});
+>>>>>>> master

@@ -45,6 +45,8 @@ var Weather = (function () {
 
   }
 
+  
+
   function init() {
     getWeather();
   }

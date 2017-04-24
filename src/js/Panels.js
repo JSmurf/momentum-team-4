@@ -7,7 +7,7 @@ var Panels = (function () {
   	function cacheDom() {
 	  	DOM.$userPref = $('.userpref');
 	  	DOM.$userPrefPanel = $('.userprefpanel');
-	  	DOM.$toDo = $('.todo');
+	  	DOM.$toDo = $('.todobutton');
 	  	DOM.$toDoPanel = $('.todopanel');
 	  	DOM.$calendar = $('.calendar');
 	  	DOM.$calendarPanel = $('.calendarpanel');

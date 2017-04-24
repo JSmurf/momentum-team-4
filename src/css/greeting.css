@@ -1,0 +1,78 @@
+/* Middle Section */
+#middle {
+	width: 100%;
+	position: fixed;
+	display: flex;
+	margin-left: auto;
+    margin-right: auto;
+    margin-top: 14em;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 0 auto;
+    flex: 1 0 auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: column;
+    padding: 0.25em;
+    justify-content: center;
+    text-align: center;
+    /*z-index: 1;*/
+}
+.date {
+    font-size: 1.6em;
+}
+.greeting {
+	font-size: 3.1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.focus {
+    font-size: 2.1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+
+}
+
+
+.hours {
+	font-size: 2.6em;
+}
+.ap {
+    font-size: 1em;
+}
+
+#nameInput, #focusInput {
+    outline: none;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #FFF7CD;
+    width: 50%;
+    text-align: center;
+    color: #FFF7CD;
+
+}
+
+#editBtn {
+
+    border: none;
+    background: none;
+}
+
+.focusEdited {
+
+    border-bottom: none;
+}
+
+#mainTaskInput {
+
+    margin-right: 5px;
+    margin-left: 5px;
+}
