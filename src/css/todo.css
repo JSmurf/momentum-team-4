@@ -19,6 +19,7 @@ input {
 .hidden {
 
 /*For tasks that are completed and chosen to be hidden from view*/
+display: none;
 }
 
 .completed {
@@ -91,6 +92,8 @@ input {
 	color: red;
 	border: none;
 	font-size: 1.6em;
+	background: transparent;
+
 }
 .fa-trash-o::before{
     background: black;
