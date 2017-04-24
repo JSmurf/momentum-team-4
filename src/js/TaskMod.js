@@ -518,6 +518,5 @@ var TaskMod = (function() {
 /* =============== export public methods =============== */
   return {
     init: init
-    //displayToDoList: displayToDoList
   };
 }());

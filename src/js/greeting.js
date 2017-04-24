@@ -6,6 +6,7 @@ NOTE: Depends on jQuery and jQuery UI (for reordering ToDo entries*/
 var Greeting = (function(){
 
 	'use strict';
+	
 	// placeholder for cached DOM elements
 	var DOM = {};
 	var name; //Stores the user's name
@@ -35,45 +36,81 @@ var Greeting = (function(){
 
 
 
-	//Capture name of user 
-
-
-	//Capture and display main task
-
-
-	//Set and display time/time of day
-
-
-	// // bind events
-	// function bindEvents() {
-	// DOM.$someElement.click(handleClick);
-	// }
-	// // handle click events
-	// function handleClick(e) {
-	// render(); // etc
-	// }
-	// render DOM elements
-
 	function bindUserName(e){
+
+		var key = e.which || e.keyCode;
+    	
 		//Get the user's name from the nameInput control
+		if (key === 13) { // 13 is enter
+			e.preventDefault();
 
-		//Save name to localStorage
+			var nameInput = document.getElementById("nameInput");
 
-		//Render main focus query
+			var user = nameInput.value;
 
-		//Set the nameInput control as hidden and display proper greeting
+			//Save name to localStorage and show greeting
+			localStorage.setItem("username", user);
+			DOM.$greeting.html("Good " + tod + ", " + user + ".");
 
-		//Remove the keypress handler
+			//Render main focus query
+			renderMainTask();
+	      
+	    }
+
+
 	}
 
 	function bindMainFocus(e){
+
+		var key = e.which || e.keyCode;
+    	
 		//Get the user's main focus from the focusInput control
+		if (key === 13) { // 13 is enter
+			e.preventDefault();
 
-		//Set the focusInput control as hidden and display main focus
+			var query = document.getElementById('focus-header');
 
-		//Remove the keypress handler
+			var focusInput = document.getElementById("focusInput");
 
-		//Save main focus to localStorage
+			var mainTask = document.getElementById("mainTask");
+
+			query.innerHTML = "Today";
+
+			var focus = focusInput.value;
+
+			//Save focus to localStorage and display edit icon
+			localStorage.setItem("focus", focus);
+			
+			//focusInput.setAttribute("readonly", true);
+			focusInput.removeEventListener("keypress", bindMainFocus);
+			focusInput.style.display = "none";
+
+			//Create a ToDo and add it in
+			mainFocusHelper(focus, mainTask);
+
+			mainTask.style.display = "inline-block";
+
+
+
+
+			
+
+			
+	      
+	    }
+
+	}
+
+	function bindEditMainFocus(e){
+
+		e.preventDefault();
+
+		var focusInput = document.getElementById("focusInput");
+		focusInput.classList.remove("focusEdited");
+		focusInput.setAttribute("readonly", false);
+		focusInput.addEventListener("keypress", bindMainFocus);
+		$("#editBtn").remove();
+
 	}
 
 	function setTOD(hour){
@@ -106,10 +143,12 @@ var Greeting = (function(){
 
 			var nameInput = document.createElement('input');
 			nameInput.setAttribute("id", "nameInput");
+			nameInput.setAttribute("type", "text");
 			nameInput.className = "form-control";
-			nameInput.style.display = "block";
 			nameInput.addEventListener("keypress", bindUserName);
-			DOM.$greeting.html(msg);
+			//nameInput.setAttribute("readonly", false);
+			nameInput.autofocus = true;
+			DOM.$greeting.append(msg);
 			DOM.$greeting.append(nameInput);
 		}else {
 
@@ -131,26 +170,95 @@ var Greeting = (function(){
 		var user = localStorage.getItem("username");
 		var mainFocus = localStorage.getItem("focus");
 
+		var query = document.createElement('p');
+		query.setAttribute("id", "focus-header");
+
+		var focusInput = document.createElement('input');
+		focusInput.setAttribute("id", "focusInput");
+		//focusInput.setAttribute("placeholder", msg);
+		focusInput.className = "form-control";
+		focusInput.style.display = "block";
+		focusInput.addEventListener("keypress", bindMainFocus);
+
+		var mainTask = document.createElement('div');
+		mainTask.setAttribute("id", "mainTask");
+
 		if(user){
 
 			if(!mainFocus){
 
 				var msg = "What is your main focus for today?";
 
-				var focusInput = document.createElement('input');
-				focusInput.setAttribute("id", "focusInput");
-				focusInput.setAttribute("placeholder", msg);
-				focusInput.className = "form-control";
-				focusInput.style.display = "block";
-				focusInput.addEventListener("keypress", bindMainFocus);
-				DOM.$focus.append(focusInput);
+				query.innerHTML = msg;
+
+				mainTask.style.display= "none";
+
+								
+
 			}else {
 
-				DOM.$focus.html(mainFocus);
+				query.innerHTML ="Today";
+				DOM.$focus.append(query);
+
+				focusInput.style.display = "none";
+
+				mainFocusHelper(mainFocus, mainTask);
+
 			}
+
+			DOM.$focus.append(query);
+			DOM.$focus.append(focusInput);
+			DOM.$focus.append(mainTask);
 		}
 
 	
+	}
+
+	//Focus helper takes a task and a div element and constructs the display 
+	function mainFocusHelper(task, mainTask){
+
+		//Set up the task completed checkbox and bind the completion event
+	    var mainCmpBtnId = "mainTaskCheckbox";
+	    var taskCmpBtn = document.createElement('input');
+	    taskCmpBtn.setAttribute("type", "checkbox");
+	    taskCmpBtn.setAttribute("id", mainCmpBtnId);
+	    taskCmpBtn.className = "taskCheckBox";
+	    //Check state of the task and marked checked if necessary
+	   /* if(this.completed){
+	      taskCmpBtn.checked = true;
+	    }*/
+	    //taskCmpBtn.addEventListener("change", bindCompletionEvent);
+
+	    //Set up the task input and bind the edit event
+	    var mainInputId = "mainTaskInput";
+	    var displayTask = document.createElement('span');
+	    displayTask.setAttribute("id", mainInputId);
+	    //displayTask.setAttribute("type", "text");
+	    //displayTask.value = task;
+	    displayTask.innerHTML = task;
+	    //displayTask.setAttribute("readonly", "true");//displayTask.readOnly = true apparently you can only set this when the attribute is dropped in with setAttribute
+	    //displayTask.setAttribute("autocomplete", "off");
+	    displayTask.className = "taskDesc";
+	    //Check state of the task and strikeout text if necessary. Also conditionally bind edit event
+	   /* if(this.completed){
+	      displayTask.classList.add("completed");
+	    }else{
+
+	    //displayTask.addEventListener("dblclick", bindEditToDoEvent);
+	    }*/
+	    //displayTask.addEventListener("keypress", bindDoneEditingEvent);
+	    
+	    //Set up the trash function and bind the delete event
+	    var mainDelBtnID = "mainTaskTrash";
+	    var taskDelBtn = document.createElement('button');
+	    taskDelBtn.setAttribute("id", mainDelBtnID);
+	    taskDelBtn.className = "taskTrash";
+	    taskDelBtn.innerHTML = "<i class='fa fa-trash-o' aria-hidden='true'></i>";
+	    //taskDelBtn.addEventListener("click", bindTaskRemovalEvent);
+
+	    mainTask.appendChild(taskCmpBtn);
+	    mainTask.appendChild(displayTask);
+	    mainTask.appendChild(taskDelBtn);
 	}
 
 	function renderTimeandDate() {
@@ -175,13 +283,17 @@ var Greeting = (function(){
 	   	setTOD(hour);
 	   	var minute = date.getMinutes();
 		var amPM = (hour > 11) ? "pm" : "am";
+		
 		if(hour > 12) {
-		hour -= 12;
+
+			hour -= 12;
 		} else if(hour == 0) {
-		hour = "12";
+		
+			hour = "12";
 		}
 		if(minute < 10) {
-		minute = "0" + minute;
+		
+			minute = "0" + minute;
 		}
 		
 		DOM.$hours.html(hour + ":" + minute);
