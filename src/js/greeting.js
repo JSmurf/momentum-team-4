@@ -90,26 +90,84 @@ var Greeting = (function(){
 
 			mainTask.style.display = "inline-block";
 
-
-
-
-			
-
-			
+		
 	      
 	    }
 
 	}
 
-	function bindEditMainFocus(e){
+	//Main task event functions for mainTaskCheckbox mainTaskInput and mainTaskTrash
+	function bindCompletionEvent(e){
 
-		e.preventDefault();
+		 //on marking a todo as completed we should set its state and strikeout its description
 
-		var focusInput = document.getElementById("focusInput");
-		focusInput.classList.remove("focusEdited");
-		focusInput.setAttribute("readonly", false);
-		focusInput.addEventListener("keypress", bindMainFocus);
-		$("#editBtn").remove();
+    e.preventDefault();
+
+    //Get the next sibling of the checkbox to grab the input element
+    var displayTask = document.getElementById("mainTaskInput");
+    var taskDelBtn = document.getElementById("mainTaskTrash");
+    
+    if(e.target.checked){
+
+      //alert("Completion triggered");
+
+      displayTask.classList.add("completed");
+      mainTaskTrash.innerHTML = "<i class='fa fa-plus fa-2x' aria-hidden='true'></i>";
+
+    } else{
+
+      //alert("Uncompletion triggered");
+
+      displayTask.classList.remove("completed");
+      mainTaskTrash.innerHTML = "<i class='fa fa-trash-o' aria-hidden='true'></i>";
+    }
+
+    //Save main task state
+    
+
+	}
+
+	function bindMainTaskMouseEnter(e){
+
+		var taskCmpBtn = document.getElementById("mainTaskCheckbox");
+		taskCmpBtn.style.display = "inline";
+
+		var taskDelBtn = document.getElementById("mainTaskTrash");
+		taskDelBtn.style.display = "inline";
+
+	}
+
+	function bindMainTaskMouseExit(e){
+
+		var taskCmpBtn = document.getElementById("mainTaskCheckbox");
+
+		if(!taskCmpBtn.checked){
+
+		taskCmpBtn.style.display = "none";
+
+		var taskDelBtn = document.getElementById("mainTaskTrash");
+		taskDelBtn.style.display = "none";
+		}
+
+	}
+
+	function bindTaskRemovalEvent(e){
+
+		 e.preventDefault();
+
+	    //Get the next sibling of the checkbox to grab the input element
+	    //var displayTask = document.getElementById("mainTaskInput");
+
+	    //displayTask.style.display = "none";
+
+	    //displayTask.innerHTML = "";
+
+	    //Wipe the previous main task and re-render
+	    localStorage.removeItem("focus");
+
+	    DOM.$focus.html("");
+
+	    renderMainTask();
 
 	}
 
@@ -152,7 +210,7 @@ var Greeting = (function(){
 			DOM.$greeting.append(nameInput);
 		}else {
 
-			DOM.$greeting.html("Good " + tod + ", " + user);
+			DOM.$greeting.html("Good " + tod + ", " + user + ".");
 		}
 
 
@@ -198,7 +256,7 @@ var Greeting = (function(){
 			}else {
 
 				query.innerHTML ="Today";
-				DOM.$focus.append(query);
+				//DOM.$focus.append(query);
 
 				focusInput.style.display = "none";
 
@@ -223,11 +281,13 @@ var Greeting = (function(){
 	    taskCmpBtn.setAttribute("type", "checkbox");
 	    taskCmpBtn.setAttribute("id", mainCmpBtnId);
 	    taskCmpBtn.className = "taskCheckBox";
+	    taskCmpBtn.style.display = "none";
 	    //Check state of the task and marked checked if necessary
 	   /* if(this.completed){
 	      taskCmpBtn.checked = true;
 	    }*/
-	    //taskCmpBtn.addEventListener("change", bindCompletionEvent);
+	    taskCmpBtn.addEventListener("change", bindCompletionEvent);
+
 
 	    //Set up the task input and bind the edit event
 	    var mainInputId = "mainTaskInput";
@@ -239,6 +299,7 @@ var Greeting = (function(){
 	    //displayTask.setAttribute("readonly", "true");//displayTask.readOnly = true apparently you can only set this when the attribute is dropped in with setAttribute
 	    //displayTask.setAttribute("autocomplete", "off");
 	    displayTask.className = "taskDesc";
+	    
 	    //Check state of the task and strikeout text if necessary. Also conditionally bind edit event
 	   /* if(this.completed){
 	      displayTask.classList.add("completed");
@@ -254,11 +315,15 @@ var Greeting = (function(){
 	    taskDelBtn.setAttribute("id", mainDelBtnID);
 	    taskDelBtn.className = "taskTrash";
 	    taskDelBtn.innerHTML = "<i class='fa fa-trash-o' aria-hidden='true'></i>";
-	    //taskDelBtn.addEventListener("click", bindTaskRemovalEvent);
+	    taskDelBtn.addEventListener("click", bindTaskRemovalEvent);
+	    taskDelBtn.style.display = "none";
 
 	    mainTask.appendChild(taskCmpBtn);
 	    mainTask.appendChild(displayTask);
 	    mainTask.appendChild(taskDelBtn);
+
+	    mainTask.addEventListener("mouseenter", bindMainTaskMouseEnter);
+		mainTask.addEventListener("mouseleave", bindMainTaskMouseExit);
 	}
 
 	function renderTimeandDate() {
