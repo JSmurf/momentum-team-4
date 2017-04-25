@@ -6,8 +6,8 @@ $(document).ready(function () {
   userPref.init();
   Quotes.init();
   Weather.init();
-  Calendar.init();
   TaskMod.init();
   Greeting.init();
+  Calendar.init();
 
 });

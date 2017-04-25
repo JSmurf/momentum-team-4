@@ -3,41 +3,38 @@ var Calendar = (function() {
 	'use strict';
 
 	var today = new Date().getTime();
+	var eventArr = [];
 
-	function makeEvent(date, name){
-		var key = date + name.substr(0, 4);
-		localStorage.key = JSON.stringify({"date" : date, "name" : name});
-		makeDisplays();
+	function startup(){
+		if (localStorage.hasOwnProperty("calendar") === false) {
+			localStorage.setItem("calendar" : "[]");
+		};
+	 eventArr.push(JSON.parse(localStorage.getItem("calendar"));
 	};
 
-	function getEvents() {
-
+	function makeEvent(date, name){
+		eventArr.push([date, name]);
+		localStorage.setItem("calendar" : JSON.stringify(eventArr) );
+		makeDisplays();
 	};
 
 	// function clearPassed(){};
 
-	function displayEvent(key, date, name) {
-		$("#calendar").append("<div class='row'><div><h4>" + name + "</h4><h5>" + date + "</h5></div>" + "<div><i id='" + key + "' class='fa fa-trash'></i></div></div>");
+	function displayEvent(index, date, name) {
+		$("#calendar").append(
+			"<div class='row'><div><h4>" + name + "</h4><h5>" + date + "</h5></div>" + "<div><i id='" + index + "' class='fa fa-trash eventTrash'></i></div></div>"
+			);
 		
 	};
 
-
-	//Function to make an array to sort, then itterate through to 
+	// Function to make an array to sort, then itterate through to build displays
 	function makeDisplays() {
 		$("#calendar").html('');
-		var eventArr = [];
-		for (var event in localStorage) {
-			if (localStorage.hasOwnProperty(event)) {	
-				var tempObj = JSON.parse(localStorage.getItem(event));			
-				eventArr.push([event, tempObj.date, tempObj.name]);
-				console.log(tempObj);
-		};
-	};
 		eventArr.sort();
 
 		for (var i = 0; i < eventArr.length; i++) {
-			displayEvent(eventArr[i][0], eventArr[i][1], eventArr[i][2]);
-		};
+			displayEvent(i, eventArr[i][0], eventArr[i][1]);
+		}
 	};
 
 
@@ -50,12 +47,12 @@ var Calendar = (function() {
   	});
 
 	function init() {
+		startup();
 		makeDisplays();
-		console.log(localStorage);
 	}
 
 	return {
 		init: init
-	}
+	};
 
 	}());
