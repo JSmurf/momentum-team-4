@@ -88,14 +88,14 @@ display: none;
 
 }
 
-.fa-trash-o {
+.fa-trash-o, .fa-plus {
 	color: red;
 	border: none;
 	font-size: 1.6em;
 	background: transparent;
 
 }
-.fa-trash-o::before{
+.fa-trash-o::before, .fa-plus::before{
     background: black;
     border: none;
 
