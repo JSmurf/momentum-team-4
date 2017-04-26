@@ -6,17 +6,20 @@ var Calendar = (function() {
 	var eventArr = [];
 
 	function startup(){
-		if (localStorage.hasOwnProperty("calendar") === false) {
-			localStorage.setItem("calendar" : "[]");
-		};
-	 eventArr.push(JSON.parse(localStorage.getItem("calendar"));
-	};
+		if (localStorage.getItem("calendar") == []) {
+			localStorage.setItem("calendar", eventArr);
+		} else {
+
+			//console.log("Seems calendar exists");
+	 	eventArr = JSON.parse(localStorage.getItem("calendar"));
+		}
+	}
 
 	function makeEvent(date, name){
-		eventArr.push([date, name]);
-		localStorage.setItem("calendar" : JSON.stringify(eventArr) );
+		eventArr[date] = name;//altered this since it's easier to do key:value pairs this way
+		localStorage.setItem("calendar", JSON.stringify(eventArr));
 		makeDisplays();
-	};
+	}
 
 	// function clearPassed(){};
 
@@ -25,7 +28,7 @@ var Calendar = (function() {
 			"<div class='row'><div><h4>" + name + "</h4><h5>" + date + "</h5></div>" + "<div><i id='" + index + "' class='fa fa-trash eventTrash'></i></div></div>"
 			);
 		
-	};
+	}
 
 	// Function to make an array to sort, then itterate through to build displays
 	function makeDisplays() {
@@ -35,7 +38,7 @@ var Calendar = (function() {
 		for (var i = 0; i < eventArr.length; i++) {
 			displayEvent(i, eventArr[i][0], eventArr[i][1]);
 		}
-	};
+	
 
 
 	$("#dateInput").datetimepicker({format: 'Y/m/d h:i'});
@@ -45,6 +48,8 @@ var Calendar = (function() {
 		var name = $("#nameInput").val();
 		makeEvent(date, name);
   	});
+
+	}
 
 	function init() {
 		startup();
