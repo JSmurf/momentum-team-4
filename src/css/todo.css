@@ -29,7 +29,9 @@ display: none;
 	text-decoration:line-through;
 
 }
-
+.ui-state-default task {
+	display: inline-block;
+}
 .editing {
 
 /*For tasks currently being edited*/
@@ -88,15 +90,19 @@ display: none;
 
 }
 
-.fa-trash-o, .fa-plus {
+i.fa-trash-o {
 	color: red;
-	border: none;
 	font-size: 1.6em;
-	background: transparent;
+	background: rgba(0, 0, 0, .9);
 
 }
-.fa-trash-o::before, .fa-plus::before{
-    background: black;
+i.fa-trash-o::before {
     border: none;
-
-}
+    margin-left: 10px;
+    background: rgba(0, 0, 0, .9);
+  }
+  .taskDelBtn {
+  	background: transparent;
+  	margin-left: 10px;
+  	border: none;
+  }

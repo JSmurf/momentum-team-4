@@ -5,16 +5,16 @@
 
 /* User Pref Panel */
 .userprefpanel {
-	height: 24em;
-	width: 28em;
+	postition: absolute;
+	height: 20em;
+	width: 22em;
 	float: left;
 	padding: 10px;
 	margin-left: 10px;
-	margin-top: 18%;
+	margin-top: 19%;
 	display: none;
-	background: rgba(0, 0, 0, .8);
+	background: rgba(0, 0, 0, .9);
 	color: white;
-	z-index: 3;
 	resize: vertical;
 	overflow-y: scroll;
 }
@@ -113,13 +113,13 @@ input {
 	float: right;
 	padding: 10px;
 	margin-right: 10px;
-	margin-top: 18%;
+	margin-top: 19%;
 	display: none;
 	background: rgba(0, 0, 0, .9);
 	color: white;
-	z-index: 999;
 	resize: vertical;
 	overflow-y: scroll;
+	postition: absolute;
 }
 
 /* About Panel */
@@ -136,8 +136,8 @@ input {
 	display: none;
 	background: rgba(0, 0, 0, .9);
 	color: white;
-	z-index: 2;
 	resize: vertical;
+	postition: absolute;
 }
 .developers, .chingu, .buildto {
 	text-align: center;
@@ -190,16 +190,18 @@ input {
 
 .calendarpanel {
 	height: 20em;
-	width: 25em;
+	width: 22em;
 	float: right;
 	padding: 10px;
 	margin-left: auto;
   margin-right: 10px;
-	margin-top: 10px;
+	margin-top: 20px;
 	display: none;
 	background: rgba(0, 0, 0, .9);
 	color: white;
-	z-index: 2;
+	resize: vertical;
+	overflow-y: scroll;
+	postition: absolute;
 }
 
 @media (max-device-width: 800px) {
@@ -218,11 +220,14 @@ input {
 		width: 80%;
 	}
 	.aboutpanel {
-		height: 30em;
+		height: 32em;
 		width: 80%;
 	}
 }
 @media (max-device-width: 500px) {
+	body {
+		font: 98%;
+	}
 	.userprefpanel {
 		margin-top: 70%;
 	}

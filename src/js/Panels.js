@@ -18,7 +18,7 @@ var Panels = (function () {
 	function clickPanel() {
 	
 		DOM.$userPref.click(function() {   
-		    DOM.$userPrefPanel.toggle();    
+		    DOM.$userPrefPanel.toggle();  
 		});
 
 		DOM.$toDo.click(function() {   
