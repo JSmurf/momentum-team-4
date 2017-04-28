@@ -16,7 +16,7 @@ body {
 body {
 	/* fonts */
     font-family: 'Roboto', 'Arial', sans-serif;
-    font-size: 1.1rem;
+    font-size: 1rem;
 	color: #FFF7CD;
 	text-shadow: 3px 3px 5px rgba(0, 0, 0, 1);
     overflow:hidden;
@@ -40,6 +40,7 @@ body {
 
 .Grid {
   display: flex;
+  position: relative;
 }
 
 .Grid-cell {
@@ -48,22 +49,25 @@ body {
 
 /* Top of Page */
 header {
-  position: fixed;
+  position: absolute;
   width: 100%;
   height: 60px;
   margin: 0;
   padding: 0;
-  z-index: 1;
 }
 .weather {
 	float: left;
 	padding-left: 6px;
+    z-index: -1;
 }
-#unit {
-    background: transparent;
-    color: #FFF7CD;
+.unit {
+    color: white;
     cursor: pointer;
     font-size: .6em;
+    background: transparent;
+}
+.unit:active {
+    color: white;
 }
 .about {
 	float: center;
@@ -86,8 +90,8 @@ header {
 	text-shadow: none;
 	cursor: pointer;
 }
-#unit:hover {
-    rgb(69,128,168);
+.unit:hover {
+    color: rgb(69,128,168);
 }
 .about > img:hover {
 	cursor: pointer;
@@ -102,7 +106,7 @@ header {
 
 /* Bottom of Page */
 footer {
-	position: fixed;
+	position: absolute;
     width: 100%;
     height: 90px;
     margin: 0;
@@ -123,7 +127,7 @@ footer {
 	width: 100%;
     height: 100%;
 	padding-bottom: 20em;
-    z-index: -2;
+    z-index: -1;
 }
 .quote-content {
 	font-size: 1em;
@@ -161,6 +165,9 @@ footer {
         margin-top: 23%;
     }
     .greeting {
-        font-size: 2.4em;
+        font-size: 2em;
+    }
+    .quote {
+        font-size: .85em;
     }
 }

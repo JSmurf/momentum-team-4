@@ -29,7 +29,7 @@ var Weather = (function () {
 
       var temp = "f";
 
-      $("#unit").on("click", function(){      
+      $(".unit").on("click", function(){      
        if (temp === "f"){
         $("#weatherTemperature").html("");
          $("#weatherTemperature").html(listC);
