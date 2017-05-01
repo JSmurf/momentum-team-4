@@ -7,7 +7,6 @@ var Weather = (function () {
    $.getJSON("http://ip-api.com/json", function(data2){
       var lat = data2.lat;
       var lon = data2.lon;
-      //$("#data").html("Lattitude = " + lat + "<br> Longitude = " + lon);
      
       var weatherApi = "http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=f42f0a6dd3ff2b1b9e8d3e1e434b8ad1";
     

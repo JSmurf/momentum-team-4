@@ -15,10 +15,23 @@
 	<!-- our css -->
 	<link rel="stylesheet" href="./src/css/app.css">
 	<link rel="stylesheet" href="./src/css/panels.css">
+	<link rel="stylesheet" href="./src/css/calendar.css">
+
+	<!-- jQuery-ui etc CSS-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.3/jquery.datetimepicker.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.3/jquery.datetimepicker.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.3/jquery.datetimepicker.min.css.map">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.3/build/jquery.datetimepicker.min.css">
+
+	<!-- favicon -->
+    <link rel="shortcut icon" type="image/png" href="./src/assets/logopixels.png">
+
 	<link rel="stylesheet" href="./src/css/todo.css">
 	<link rel="stylesheet" href="./src/css/greeting.css">
   <!-- weather icons -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css">
+
 
 	<!-- favicon -->
   <link rel="shortcut icon" type="image/png" href="./src/assets/logopixels.png">
@@ -78,6 +91,10 @@
 
 		<!-- Calendar Panel -->
 		<div class="calendarpanel">
+		<div id="calendar"><div id="append"></div></div>
+		<input type="text" id="dateInput">
+		<input type="text" id="nameInput">
+		<button id="eventAdd">Add</button>
 		</div>
 	</div>
 
@@ -204,6 +221,12 @@
  	<!-- vendor javascript -->
 	<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<!-- 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.3/jquery.datetimepicker.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.3/jquery.datetimepicker.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.3/build/jquery.datetimepicker.full.js"></script> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.3/build/jquery.datetimepicker.full.min.js"></script>
+<!-- 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.3/build/jquery.datetimepicker.min.js"></script> -->
+
 
 
 	<!-- our javascript -->
@@ -212,6 +235,7 @@
 	<script src="./src/js/userPref.js"></script>
 	<script src="./src/js/Quotes.js"></script>
 	<script src="./src/js/Weather.js"></script>
+	<script src="./src/js/Calendar.js"></script>
 	<script src="src/js/TaskMod.js"></script>
 	<script src="src/js/greeting.js"></script>
 

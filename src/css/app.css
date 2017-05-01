@@ -85,7 +85,7 @@ header {
 	padding: 6px;
 }
 /* Hover effects*/
-.weather:hover {
+#unit:hover {
 	color: rgb(69,128,168);
 	text-shadow: none;
 	cursor: pointer;
