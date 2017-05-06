@@ -1,6 +1,6 @@
 var Quotes = (function () {
 
-	'use strict';
+	//'use strict';
 
 	var DOM = {};
 
