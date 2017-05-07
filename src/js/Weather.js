@@ -1,6 +1,6 @@
 var Weather = (function () {
 
-  'use strict';
+  //'use strict';
 
   function getWeather() {
   
