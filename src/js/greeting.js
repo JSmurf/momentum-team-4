@@ -5,7 +5,7 @@ NOTE: Depends on jQuery and jQuery UI (for reordering ToDo entries*/
 
 var Greeting = (function(){
 
-	'use strict';
+	//'use strict';
 	
 	// placeholder for cached DOM elements
 	var DOM = {};
@@ -88,7 +88,7 @@ var Greeting = (function(){
 			//Create a ToDo and add it in
 			mainFocusHelper(focus, mainTask);
 
-			mainTask.style.display = "inline-block";
+			//mainTask.style.display = "inline-block";
 
 		
 	      
@@ -322,7 +322,7 @@ var Greeting = (function(){
 	    mainTask.appendChild(displayTask);
 	    mainTask.appendChild(taskDelBtn);
 
-	    mainTask.addEventListener("mouseenter", bindMainTaskMouseEnter);
+	  mainTask.addEventListener("mouseenter", bindMainTaskMouseEnter);
 		mainTask.addEventListener("mouseleave", bindMainTaskMouseExit);
 	}
 

@@ -1,6 +1,6 @@
 var Panels = (function () {
 
-	'use strict';
+	//'use strict';
 
   	var DOM = {};
 
@@ -18,11 +18,23 @@ var Panels = (function () {
 	function clickPanel() {
 	
 		DOM.$userPref.click(function() {   
-		    DOM.$userPrefPanel.toggle();  
+		    DOM.$userPrefPanel.toggle();
+		    $('#middle').css("z-index", -1);
+		    DOM.$userPrefPanel.css("z-index", 1);
+
 		});
 
+		if ( $('.userprefpanel').css('display') == 'none' ){
+    // element is hidden
+    console.log("hidden");
+    $('#middle').css("z-index", 1);
+		DOM.$userPrefPanel.css("z-index", -1);
+		}
+
 		DOM.$toDo.click(function() {   
-		    DOM.$toDoPanel.toggle();     
+		    DOM.$toDoPanel.toggle();
+		    $("#middle").css("z-index", -1);
+		    DOM.$toDoPanel.css("z-index", 1); 
 		});
 
 		DOM.$calendar.click(function() {

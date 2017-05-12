@@ -5,7 +5,7 @@
 
 /* User Pref Panel */
 .userprefpanel {
-	postition: absolute;
+	position: absolute;
 	height: 20em;
 	width: 22em;
 	float: left;
@@ -119,7 +119,6 @@ input {
 	color: white;
 	resize: vertical;
 	overflow-y: scroll;
-	postition: absolute;
 }
 
 /* About Panel */

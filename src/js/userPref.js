@@ -1,6 +1,6 @@
 var userPref = (function () {
 
-	'use strict';
+	//'use strict';
 
 	var DOM = {};
 
