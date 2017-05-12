@@ -1,10 +1,10 @@
 var Weather = (function () {
 
-  'use strict';
+  //'use strict';
 
   function getWeather() {
   
-   $.getJSON("http://ip-api.com/json", function(data2){
+   $.getJSON("https://crossorigin.me/http://ip-api.com/json", function(data2){
       var lat = data2.lat;
       var lon = data2.lon;
      

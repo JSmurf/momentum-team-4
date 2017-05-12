@@ -8,6 +8,6 @@ $(document).ready(function () {
   Weather.init();
   TaskMod.init();
   Greeting.init();
-  Calendar.init();
+  //Calendar.init();
 
 });

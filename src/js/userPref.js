@@ -1,6 +1,6 @@
 var userPref = (function () {
 
-	'use strict';
+	//'use strict';
 
 	var DOM = {};
 
@@ -65,7 +65,7 @@ var userPref = (function () {
 					"background-color": "#bcf6ff",
 					"text-shadow": "none"
 				});
-				$('#unit').css({
+				$('.unit').css({
 					"color": "#000"
 				});
 				$('.quote-content').css({
@@ -85,6 +85,9 @@ var userPref = (function () {
 					"color": "#fff",
 					"background-image": "url('https://static.pexels.com/photos/353423/pexels-photo-353423.jpeg')",
 					"background-color": "#005460"
+				});
+				$('.weather').css({
+					"color" : "#fff"
 				});
 		}
 	}

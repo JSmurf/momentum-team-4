@@ -5,7 +5,7 @@
 
 /* User Pref Panel */
 .userprefpanel {
-	postition: absolute;
+	position: absolute;
 	height: 20em;
 	width: 22em;
 	float: left;
@@ -13,7 +13,7 @@
 	margin-left: 10px;
 	margin-top: 19%;
 	display: none;
-	background: rgba(0, 0, 0, .9);
+	background: #474950;
 	color: white;
 	resize: vertical;
 	overflow-y: scroll;
@@ -115,11 +115,10 @@ input {
 	margin-right: 10px;
 	margin-top: 19%;
 	display: none;
-	background: rgba(0, 0, 0, .9);
+	background: #474950;
 	color: white;
 	resize: vertical;
 	overflow-y: scroll;
-	postition: absolute;
 }
 
 /* About Panel */
@@ -127,14 +126,14 @@ input {
 .aboutpanel {
 	height: 24em;
 	width: 28em;
-	float: center;
+	float: right;
 	padding: 10px;
 	padding-top: 3.85em;
 	margin-left: auto;
   margin-right: auto;
 	margin-top: 0;
 	display: none;
-	background: rgba(0, 0, 0, .9);
+	background: #474950;
 	color: white;
 	resize: vertical;
 	postition: absolute;
@@ -186,7 +185,7 @@ input {
 	color: rgb(69,128,168);
 }
 
-/* Calendar Panel */
+/* Calendar Panel 
 
 .calendarpanel {
 	height: 20em;
@@ -203,6 +202,7 @@ input {
 	overflow-y: scroll;
 	postition: absolute;
 }
+*/
 
 @media (max-device-width: 800px) {
 	.userprefpanel {

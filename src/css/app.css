@@ -58,7 +58,7 @@ header {
 .weather {
 	float: left;
 	padding-left: 6px;
-    z-index: -1;
+    color: white;
 }
 .unit {
     color: white;
@@ -69,23 +69,19 @@ header {
 .unit:active {
     color: white;
 }
-.about {
-	float: center;
-	padding: 6px;
-	text-align: center;
-	text-shadow: none;
-}
 .about > img {
 	border-radius: 50%;
 	float: center;
 	border: 2px solid black;
 }
-.calendar {
+.about {
 	float: right;
 	padding: 6px;
+    text-align: center;
+    text-shadow: none;
 }
 /* Hover effects*/
-#unit:hover {
+.unit:hover {
 	color: rgb(69,128,168);
 	text-shadow: none;
 	cursor: pointer;
@@ -127,7 +123,6 @@ footer {
 	width: 100%;
     height: 100%;
 	padding-bottom: 20em;
-    z-index: -1;
 }
 .quote-content {
 	font-size: 1em;

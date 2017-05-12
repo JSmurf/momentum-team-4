@@ -17,17 +17,13 @@ input {
 }
 
 .hidden {
-
 /*For tasks that are completed and chosen to be hidden from view*/
 display: none;
 }
 
 .completed {
-
 /*For tasks marked as completed*/
-
 	text-decoration:line-through;
-
 }
 .ui-state-default task {
 	display: inline-block;
@@ -35,7 +31,7 @@ display: none;
 .editing {
 
 /*For tasks currently being edited*/
-	background-color: whitesmoke;
+	background-color: #474950;
 
 }
 
@@ -75,15 +71,11 @@ display: none;
 
 }
 
-.task:hover {
-
-  /*Handle task focus highlights*/
-}
 
 .newtask {
 
 	outline: none;
-	background-color: transparent;
+	background-color: #474950;
 	border: none;
 	color: whitesmoke;
 
@@ -93,16 +85,16 @@ display: none;
 i.fa-trash-o {
 	color: red;
 	font-size: 1.6em;
-	background: rgba(0, 0, 0, .9);
+	background: #474950;
 
 }
 i.fa-trash-o::before {
     border: none;
     margin-left: 10px;
-    background: rgba(0, 0, 0, .9);
+    background: #474950;
   }
   .taskDelBtn {
-  	background: transparent;
+  	background: #474950;
   	margin-left: 10px;
   	border: none;
   }
